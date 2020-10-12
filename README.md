@@ -49,6 +49,4 @@ Link: *https://github.com/mstr-Wolf/scheduleRequest/tree/master/docs*
 [Apache License 2.0](https://github.com/mstr-Wolf/scheduleRequest/blob/master/LICENSE)
 
 # Contact
-- Gmail
-    - lohan.uchoa@edu.unirio.br
-    - lohan.chuan123@gmail.com
+- :mailbox_with_mail: lohan.chuan123@gmail.com
