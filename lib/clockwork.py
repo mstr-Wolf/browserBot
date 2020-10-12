@@ -3,10 +3,8 @@ from time import sleep
 import os
 import sys
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-from lib import (read_file_content, open_url, last_date_recovery, DATETIME_NOW)
+from .file_actions import DATETIME_NOW
+from .browser_request import open_url
 
 class clockwork():
     def __init__(self, timezone, givenURL, **kwargs):
@@ -29,10 +27,11 @@ class clockwork():
                 print("Time reached\nStarting service...")
                 try:
                     open_url(self.URL)
-                    sys.exit(0)
                 except:
                     print("ERROR TRYING TO OPEN URL")
-                    sys.exit(1)
+                    raise
+                finally:
+                    sys.exit(0)
             sleep(1)
     
     def get_time(self):

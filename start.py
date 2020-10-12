@@ -1,6 +1,5 @@
-from clockwork import clockwork
 import sys
-from lib import (read_file_content, last_date_recovery)
+from lib import (clockwork, read_file_content, last_date_recovery)
 
 if __name__=="__main__":
     try:
