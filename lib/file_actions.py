@@ -9,8 +9,8 @@ def read_file_content():
         if int(date[1]) < DATETIME_NOW.day or int(date[0]) < DATETIME_NOW.month:
             file_.seek(0)
             file_.write("{} {}".format(str(DATETIME_NOW.month), str(DATETIME_NOW.day)))
-            return "True"
-        else: return "False"
+            return True
+        else: return False
 
 def last_date_recovery():
     with open("lib/boot", "w") as file_:

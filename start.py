@@ -7,7 +7,7 @@ if __name__=="__main__":
     except:
         print("FILE CORRUPTED!")
         sys.exit(1)
-    if play == "False": sys.exit(0)
+    if play == False: sys.exit(0)
 
     if len(sys.argv) == 1:
         last_date_recovery()
