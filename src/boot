@@ -1,0 +1,10 @@
+10 12
+
+# Configuration example:
+10 12
+
+# Each number refers to when the program was activate:
+- 10 refers to the last month
+- 12 refers to the last day
+
+> NOTE: day must be one less than today
