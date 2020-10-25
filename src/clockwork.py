@@ -1,6 +1,5 @@
 from delorean import Delorean
 from time import sleep
-import os
 import sys
 
 from .file_actions import DATETIME_NOW
@@ -14,7 +13,7 @@ class clockwork():
             self.__target = Delorean(datetime = DATETIME_NOW,timezone=timezone).replace(hour = kwargs["hour"],
                                                                                     minute = kwargs["minute"],
                                                                                     second = kwargs["second"])
-        except:
+        except KeyError:
             print("Time not provided!")
             sys.exit(1)
         self.__URL = givenURL
@@ -23,7 +22,7 @@ class clockwork():
         while True:
             self.get_time()
             print(self.__time_now.format_datetime(), "\n")
-            if self.__time_now == self.__target or self.__time_now > self.__target: 
+            if self.__time_now == self.__target or self.__time_now > self.__target:
                 print("Time reached\nStarting service...")
                 try:
                     open_url(self.URL)
