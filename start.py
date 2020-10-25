@@ -4,9 +4,9 @@ from src import (clockwork, read_file_content, last_date_recovery)
 if __name__=="__main__":
     try:
         play = read_file_content()
-    except:
+    except (ValueError, IndexError):
         print("FILE CORRUPTED!")
-        sys.exit(1)
+        sys.exit(0)
     if play == False: sys.exit(0)
 
     if len(sys.argv) == 1:
