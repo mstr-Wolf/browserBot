@@ -17,7 +17,7 @@ class clockwork():
             print("Time not provided!")
             sys.exit(1)
         self.__URL = givenURL
-    
+
     def run(self):
         while True:
             self.get_time()
