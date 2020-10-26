@@ -13,14 +13,12 @@ if __name__=="__main__":
         last_date_recovery()
         sys.exit(0)
     if sys.argv[1] == "--help":
-        print("[PYTHON COMPILER] start.py [TIMEZONE] [HOUR:MINUTE:SECOND] [URL]")
+        print("[PYTHON COMPILER] start.py [HOUR:MINUTE:SECOND] [URL]")
         last_date_recovery()
     else:
         try:
-            target_time = sys.argv[2].split(":")
-            ben = clockwork(sys.argv[1],
-                        sys.argv[3],
-                        hour=int(target_time[0]),
+            target_time = sys.argv[1].split(":")
+            ben = clockwork(URL=sys.argv[2], hour=int(target_time[0]),
                         minute=int(target_time[1]),
                         second=int(target_time[2]),)
             ben.run()
