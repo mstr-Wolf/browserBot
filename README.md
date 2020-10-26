@@ -23,8 +23,7 @@ from clockwork import clockwork
 import sys
 
 target_time = ["10", "00","00"]
-ben = clockwork("America/Sao_Paulo",
-            "https://github.com/mstr-Wolf/scheduleRequest.git",
+ben = clockwork("https://github.com/mstr-Wolf/scheduleRequest.git",
             hour=int(target_time[0]),
             minute=int(target_time[1]),
             second=int(target_time[2]),)
@@ -32,11 +31,11 @@ ben.run()
 ```
 **or run the script at command line:**
 ```shell script
-python3 start.py America/Sao_Paulo 10:00:00 https://www.youtube.com/watch?v=ZdJ6FO9HAcc
+python3 start.py 10:00:00 https://www.youtube.com/watch?v=ZdJ6FO9HAcc
 ```
 **or even**
 ```shell script
-pypy3 start.py America/Sao_Paulo 10:00:00 https://www.youtube.com/watch?v=ZdJ6FO9HAcc
+pypy3 start.py 10:00:00 https://www.youtube.com/watch?v=ZdJ6FO9HAcc
 ```
 
 ## [API Reference](https://github.com/mstr-Wolf/scheduleRequest/tree/master/docs)
