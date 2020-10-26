@@ -2,21 +2,18 @@ from delorean import Delorean
 from time import sleep
 import sys
 
-from .file_actions import DATETIME_NOW
 from .browser_request import open_url
 
 class clockwork():
-    def __init__(self, timezone, givenURL, **kwargs):
+    def __init__(self, URL = None, **kwargs):
         super().__init__()
-        self.__time_now = Delorean(timezone=timezone)
+        self.__time_now = Delorean().now()
         try:
-            self.__target = Delorean(datetime = DATETIME_NOW,timezone=timezone).replace(hour = kwargs["hour"],
-                                                                                    minute = kwargs["minute"],
-                                                                                    second = kwargs["second"])
+            self.__target = self.__time_now.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = kwargs["second"])
         except KeyError:
             print("Time not provided!")
             sys.exit(1)
-        self.__URL = givenURL
+        self.URL = URL
 
     def run(self):
         while True:
@@ -27,8 +24,7 @@ class clockwork():
                 try:
                     open_url(self.URL)
                 except:
-                    print("ERROR TRYING TO OPEN URL")
-                    raise
+                    print("ERROR TRYING TO GET URL")
                 finally:
                     sys.exit(0)
             sleep(1)
@@ -37,6 +33,3 @@ class clockwork():
         self.__time_now = self.__time_now.now()
         self.__time_now.truncate("second")
     
-    def get_URL(self):
-        return self.__URL
-    URL = property(fget=get_URL)
