@@ -1,8 +1,10 @@
 from delorean import Delorean
 from time import sleep
 import sys
+import webbrowser
 
-from .browser_request import open_url
+def open_url(request_URL):
+    webbrowser.open(request_URL)
 
 class clockwork():
     def __init__(self, URL = None, **kwargs):
