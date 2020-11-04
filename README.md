@@ -46,5 +46,4 @@ pypy3 start.py 10:00:00 https://www.youtube.com/watch?v=ZdJ6FO9HAcc
 ## License
 [Apache License 2.0](https://github.com/mstr-Wolf/scheduleRequest/blob/master/LICENSE)
 
-## Contact
-lohan.chuan123@gmail.com
+## [Contact](https://github.com/mstr-Wolf/mstr-Wolf)
