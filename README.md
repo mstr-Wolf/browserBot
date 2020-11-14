@@ -1,5 +1,5 @@
 # Schedule Requests
-Play that lo-fi playlist automatically at 22pm o'clock on your dark and lonely room, while you cry 'cause she's gone
+Play that lo-fi playlist automatically at midnight, on your dark and lonely room, while you're crying 'cause she's gone
 
 ## Installation
 ```shell script
