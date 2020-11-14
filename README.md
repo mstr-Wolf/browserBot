@@ -1,5 +1,5 @@
 # Schedule Requests
-Open your favorite hosts automatically in your browser
+Play that lo-fi playlist automatically at 22pm o'clock on your dark and lonely room, while you cry 'cause she's gone
 
 ## Installation
 ```shell script
