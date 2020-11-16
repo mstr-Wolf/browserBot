@@ -1,5 +1,5 @@
 import sys
-from src import (clockwork, read_file_content, last_date_recovery)
+from src import (clockwork)
 
 if __name__=="__main__":
     if sys.argv[1] == "--help":
