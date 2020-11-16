@@ -1,4 +1,7 @@
 # Schedule Requests
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9babc73436334c38b139c2d3be998ee1)](https://app.codacy.com/gh/mstr-Wolf/scheduleRequest?utm_source=github.com&utm_medium=referral&utm_content=mstr-Wolf/scheduleRequest&utm_campaign=Badge_Grade)
+
 Play that lo-fi playlist automatically at midnight, on your dark and lonely room, while you're crying 'cause she's gone
 
 ## Installation
