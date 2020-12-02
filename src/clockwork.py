@@ -12,11 +12,10 @@ class Clockwork():
             sys.exit(1)
 
     def run(self):
-        print(__name__, "started on background!")
-        print("Process scheduled to", self.__target.format_datetime())
+        print(__name__, "started!")
+        print("Process scheduled to", self.__target.format_datetime(), "\n")
         while True:
-            self.get_time()
-
+            print(self.get_time().format_datetime(), end="\r")
             if self.__time_now == self.__target or self.__time_now > self.__target:
                 print("Time reached\nStarting process...")
                 try:
@@ -33,4 +32,4 @@ class Clockwork():
     def get_time(self):
         self.__time_now = self.__time_now.now()
         self.__time_now.truncate("second")
-    
+        return self.__time_now
