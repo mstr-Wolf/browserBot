@@ -2,7 +2,7 @@ from delorean import Delorean
 from time import sleep
 import sys
 
-class clockwork():
+class Clockwork():
     def __init__(self, **kwargs):
         self.__time_now = Delorean().now()
         try:
@@ -12,12 +12,13 @@ class clockwork():
             sys.exit(1)
 
     def run(self):
-        print(__name__, "process started on the background!")
+        print(__name__, "started on background!")
+        print("Process scheduled to", self.__target.format_datetime())
         while True:
             self.get_time()
 
             if self.__time_now == self.__target or self.__time_now > self.__target:
-                print("Time reached\nStarting service...")
+                print("Time reached\nStarting process...")
                 try:
                     self.execute()
                 except:
