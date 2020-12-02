@@ -6,6 +6,6 @@ class OpenNewTab(Clockwork):
         super().__init__(**kwargs)
         self.URL = URL
 
-    def execute(self):
+    def execute(self, **kwargs):
         webbrowser.open(self.URL)
         return
