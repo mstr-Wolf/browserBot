@@ -1,7 +1,7 @@
-import clockwork
+from clockwork import Clockwork
 import webbrowser
 
-class play_youtubeVideo(clockwork.clockwork):
+class OpenNewTab(Clockwork):
     def __init__(self, URL = None, **kwargs):
         super().__init__(**kwargs)
         self.URL = URL
