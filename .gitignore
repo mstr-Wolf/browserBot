@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+bin/
 build/
 develop-eggs/
 dist/
@@ -22,8 +23,10 @@ var/
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
+site-packages/
 *.egg-info/
 .installed.cfg
+pyvenv.cfg
 *.egg
 MANIFEST
 
