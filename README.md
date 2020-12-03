@@ -21,11 +21,9 @@ pypy3 -m pip install -r requirements.txt
 
 ## [API Reference](https://github.com/mstr-Wolf/browserBot/tree/master/docs)
 
-## Contributing
-This software has two main branches.
-- :master (stable), that only has approved features from...
-- :v.0 (unstable), where patches and updates are pushed
-> Creating a new branch, to suggest modifications to the next version, is also acceptable.
+## Contributing (Branches)
+:master (stable) approved features from :v.0 (unstable), where patches and updates are pushed
+> Create a new branch, suggesting modifications to the next version, is also accepted.
 
 ## [Issue Tracker](https://github.com/mstr-Wolf/browserBot/issues)
 
