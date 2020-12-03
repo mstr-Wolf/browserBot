@@ -1,4 +1,5 @@
-# Schedule Requests
+# browserBot
+browserBot is a easy way to schedule and control browser actions. From scheduling youtube videos, sending whatsapp messages, to even attending to classes. Let your imagination drive you, build with browserBot!
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9babc73436334c38b139c2d3be998ee1)](https://app.codacy.com/gh/mstr-Wolf/browserBot?utm_source=github.com&utm_medium=referral&utm_content=mstr-Wolf/browserBot&utm_campaign=Badge_Grade)
 
@@ -20,8 +21,13 @@ pypy3 -m pip install -r requirements.txt
 
 ## [API Reference](https://github.com/mstr-Wolf/browserBot/tree/master/docs)
 
-## [Contributing](https://github.com/mstr-Wolf/browserBot/issues)
-**Also, feel free to fork it any time!**
+## Contributing
+This software has two main branches.
+- :master (stable), that only has approved features from...
+- :v.0 (unstable), where patches and updates are pushed
+> Creating a new branch, to suggest modifications to the next version, is also acceptable.
+
+## [Issue Tracker](https://github.com/mstr-Wolf/browserBot/issues)
 
 ## License
 [Apache License 2.0](https://github.com/mstr-Wolf/browserBot/blob/master/LICENSE)
