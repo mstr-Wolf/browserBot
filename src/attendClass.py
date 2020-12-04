@@ -33,7 +33,7 @@ class AttendClass(Clockwork):
     def execute(self, **kwargs):
         self.driver = webdriver.Chrome()
         self.driver.get(self.MEET_URL)
-        self.shutdownConnection(hours = get_class_duration()[0], minutes = get_class_duration()[1])
+        self.shutdownConnection(hours = self.get_class_duration()[0], minutes = self.get_class_duration()[1])
         return
 
     def shutdownConnection(self, **kwargs):
