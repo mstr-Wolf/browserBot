@@ -39,7 +39,7 @@ class AttendClass(Clockwork):
     def shutdownConnection(self, **kwargs):
         self._Clockwork_target = self.get_time() + timedelta(hours=kwargs["hours"], minutes=kwargs["minutes"])
         while True:
-            if self.get_time() == self._Clockwork__target:
+            if self.get_time() == self._Clockwork__target or self.get_time() > self._Clockwork__target:
                 self.driver.close()
                 break
             sleep(1)
