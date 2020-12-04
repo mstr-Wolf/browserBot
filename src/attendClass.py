@@ -11,7 +11,7 @@ def assert_meeting_code(meeting_code, min_len, max_len):
         sys.exit(0)
 
     code_len = len(meeting_code)
-    if code_len != max_len or code_len != min_len:
+    if code_len != max_len and code_len != min_len:
         print("Meeting code not accepted! Please check again")
         sys.exit(0)
     elif (code_len == max_len and meeting_code[3] == "-" and meeting_code[8] == "-") or code_len == min_len:
@@ -29,13 +29,28 @@ class AttendClass(Clockwork):
         self.MEET_URL = assert_meeting_code(code, 10, 12)
         self.driver = webdriver.Chrome()
 
+    def run(self):
+        print(__name__, "started!")
+        print("Process scheduled to", self.__target.format_datetime(), "\n")
+        while True:
+            print(self.get_time().format_datetime(), end="\r")
+            if self.__time_now == self.__target or self.__time_now > self.__target:
+                print("Time reached\nStarting process...")
+                try:
+                    self.execute()
+                except:
+                    print("ERROR TRYING TO GET URL")
+                    sys.exit(0)
+                finally:
+                    self.shutdownConnection()
+            sleep(1)
+
     def execute(self, **kwargs):
         self.driver.get(self.MEET_URL)
-        self.shutdownConnection()
         return
 
     def shutdownConnection(self, **kwargs):
-        self._Clockwork__target += timedelta(hours=1, minutes=30)
+        self._Clockwork__target = self.get_time() + timedelta(hours=10, minutes=30)
         while True:
             if self.get_time() == self._Clockwork__target:
                 self.driver.close()
