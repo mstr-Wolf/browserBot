@@ -24,36 +24,28 @@ def assert_meeting_code(meeting_code, min_len, max_len):
         return "https://meet.google.com/%s" % meeting_code
 
 class AttendClass(Clockwork):
-    def __init__(self, code, **kwargs):
+    def __init__(self, code, class_length = 90, **kwargs):
         super().__init__(**kwargs)
         self.MEET_URL = assert_meeting_code(code, 10, 12)
-        self.driver = webdriver.Chrome()
-
-    def run(self):
-        print(__name__, "started!")
-        print("Process scheduled to", self.__target.format_datetime(), "\n")
-        while True:
-            print(self.get_time().format_datetime(), end="\r")
-            if self.__time_now == self.__target or self.__time_now > self.__target:
-                print("Time reached\nStarting process...")
-                try:
-                    self.execute()
-                except:
-                    print("ERROR TRYING TO GET URL")
-                    sys.exit(0)
-                finally:
-                    self.shutdownConnection()
-            sleep(1)
+        self.driver = None
+        self.length = class_length
 
     def execute(self, **kwargs):
+        self.driver = webdriver.Chrome()
         self.driver.get(self.MEET_URL)
+        self.shutdownConnection(hours = get_class_duration()[0], minutes = get_class_duration()[1])
         return
 
     def shutdownConnection(self, **kwargs):
-        self._Clockwork__target = self.get_time() + timedelta(hours=10, minutes=30)
+        self._Clockwork_target = self.get_time() + timedelta(hours=kwargs["hours"], minutes=kwargs["minutes"])
         while True:
             if self.get_time() == self._Clockwork__target:
                 self.driver.close()
                 break
             sleep(1)
         return
+
+    def get_class_duration(self, **kwargs):
+        minutes = self.length%60
+        hours = int((self.length-minutes)/60)
+        return hours, minutes
