@@ -8,6 +8,13 @@ from selenium import webdriver
 
 class AttendClass(Clockwork):
     def __init__(self, code = "aaabbbbccc", class_length = 90, **kwargs):
+        """
+            Parameters:\n
+            code (string): Meeting code\n
+            class_length (float): Class lenght (in minutes)\n
+            kwargs["hour"] (int): Class' start hour\n
+            kwargs["minute"] (int): Class' start minute\n
+        """
         super().__init__(**kwargs)
         self.MEET_URL = assert_meeting_code(code, 10, 12)
         self.driver = None
