@@ -3,7 +3,7 @@ from time import sleep
 from clockwork import Clockwork
 from selenium import webdriver
 from datetime import timedelta
-from .assert_meeting_code import assert_meeting_code
+from assert_meeting_code import assert_meeting_code
 
 class AttendClass(Clockwork):
     def __init__(self, code, class_length = 90, **kwargs):
