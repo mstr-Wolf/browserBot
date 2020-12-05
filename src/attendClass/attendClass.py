@@ -1,4 +1,3 @@
-import sys
 from time import sleep
 from clockwork import Clockwork
 from selenium import webdriver
