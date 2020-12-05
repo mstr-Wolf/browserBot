@@ -5,7 +5,7 @@ Background execution:
 
 Or execute through CLI:
     import sys
-    sys.append("/path/to/browserBot/src")
+    sys.path.append("/path/to/browserBot/src")
     from attendClass import AttendClass
     object = AttendClass()
     object.run()
