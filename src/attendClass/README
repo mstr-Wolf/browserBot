@@ -1,5 +1,5 @@
 Background execution:
-    nohup python3 -u main.py [meeting code] [class length] [target time] > log.out & cat log.out
+    nohup python3 -u main.py [meeting code] [class length] [target time] > log.out &
 *class length must be in minutes
 *target time format -> hour:minutes
 
