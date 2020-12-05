@@ -5,8 +5,8 @@ from attendClass import AttendClass
 
 try:
     class_length = float(sys.argv[2])
-    hour = int(sys.argv[3].split()[0])
-    minute = int(sys.argv[3].split()[1])
+    hour = int(sys.argv[3].split(":")[0])
+    minute = int(sys.argv[3].split(":")[1])
 except ValueError:
     print("Length & target time must be integers!")
     sys.exit()
