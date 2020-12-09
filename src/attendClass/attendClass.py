@@ -8,7 +8,8 @@ from selenium import webdriver
 
 class AttendClass(Clockwork):
     def __init__(self, code = "aaabbbbccc", class_length = 90, **kwargs):
-        """Parameters:\n
+        """
+        Parameters:\n
             code (string): Meeting code\n
             class_length (float): Class lenght (in minutes)\n
             kwargs["hour"] (int): Class' start hour\n
