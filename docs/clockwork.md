@@ -1,44 +1,34 @@
 # clockwork Class
 ```python
-class clockwork():
-    def __init__(self, URL = None, **kwargs):
-        super().__init__()
+class Clockwork():
+    def __init__(self, **kwargs):
         self.__time_now = Delorean().now()
         try:
-            self.__target = self.__time_now.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = kwargs["second"])
+            self.__target = self.__time_now.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = 0)
         except KeyError:
             print("Time not provided!")
             sys.exit(1)
-        self.URL = URL
 ```
-#### Description
-Initiate the class
-
 
 #### Parameters
-- URL *(string)*: Browser URL
 - kwargs["hour"] *(int)*: Hour
 - kwargs["minute"] *(int)*: Minute
-- kwargs["second"] *(int)*: Second
 
 #### Attributes
 - self.__time_now *(delorean.Delorean)*: Datetime informations returned from Delorean
 - self.__target *(delorean.Delorean)*: Target time
-- self.URL *(string)*: Requested URL
 
-#### Returns
-- None
-
-## run Function
+## run Method
 ```python
 def run(self):
+    print(__name__, "started!")
+    print("Process scheduled to", self.__target.format_datetime(), "\n")
     while True:
-        self.get_time()
-        print(self.__time_now.format_datetime(), "\n")
-        if self.__time_now == self.__target or self.__time_now > self.__target: 
-            print("Time reached\nStarting service...")
+        print(self.get_time().format_datetime(), end="\r")
+        if self.__time_now == self.__target or self.__time_now > self.__target:
+            print("Time reached\nStarting process...")
             try:
-                open_url(self.URL)
+                    self.execute()
             except:
                 print("ERROR TRYING TO GET URL")
             finally:
@@ -46,10 +36,23 @@ def run(self):
         sleep(1)
 ```
 ##### Description
-Works as a cronometer, waits till target time be reached
+Countdown till target time be reached and, then, executes method <self.execute>
 
 ##### Parameters
-- Instanced Object
+- None
+
+##### Returns
+- None
+
+## execute Method
+```python
+def execute(self, **kwargs):
+    raise NotImplementedError
+```
+> Method must be implemented for each child class
+
+##### Parameters
+- Takes dictionary as parameter
 
 ##### Returns
 - None
