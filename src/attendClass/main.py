@@ -1,6 +1,6 @@
-import sys, os, os.path
-os.chdir(os.getcwd()+"/../..")
-sys.path.append("./src")
+import sys, os
+sys.path.append(os.path.abspath(".") + "/..")
+
 from attendClass import AttendClass
 
 try:

@@ -22,11 +22,14 @@ class AttendClass(Clockwork):
     def execute(self, **kwargs):
         self.driver = webdriver.Chrome()
         self.driver.get(self.MEET_URL)
-        self.shutdownConnection(hours = self.get_class_duration()[0], minutes = self.get_class_duration()[1])
+
+        shutTime = self.get_class_duration()
+        self.shutdownConnection(hours = shutTime[0], minutes = shutTime[1])
         return
 
     def shutdownConnection(self, **kwargs):
-        self._Clockwork_target = self.get_time() + timedelta(hours=kwargs["hours"], minutes=kwargs["minutes"])
+        self._Clockwork__target = self.get_time() + timedelta(hours=kwargs["hours"], minutes=kwargs["minutes"])
+        print("Kill scheduled to", self._Clockwork__target.format_datetime())
         while True:
             if self.get_time() == self._Clockwork__target or self.get_time() > self._Clockwork__target:
                 self.driver.close()
