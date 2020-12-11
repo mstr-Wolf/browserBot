@@ -6,6 +6,8 @@ Background execution:
 Or execute through CLI:
     import sys
     sys.path.append("/path/to/browserBot/src")
-    from attendClass import AttendClass
-    object = AttendClass()
+
+    from attendClass import <class>
+    //INSTANCED OBJECT
+
     object.run()
