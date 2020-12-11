@@ -1,1 +1,1 @@
-from .attendClass import AttendClass
+from .attendClass import AttendClass, AutomaticLogin
