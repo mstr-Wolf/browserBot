@@ -6,7 +6,7 @@ browserBot is a easy way to schedule and control browser actions. From schedulin
 ## Installation
 Get source code
 ```shell script
-git clone https://github.com/mstr-Wolf/browserBot.git
+git clone https://github.com/sourcerer2/browserBot.git
 ```
 In case you're having problems with QT_DEVICE_PIXEL_RATIO
 ```shell script
