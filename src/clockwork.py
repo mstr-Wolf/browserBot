@@ -9,7 +9,10 @@ class Clockwork():
             self.__target = self.__time_now.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = 0)
         except KeyError:
             print("Time not provided!")
-            sys.exit(1)
+            sys.exit()
+        except TypeError:
+            print("Invalid time values!")
+            sys.exit()
 
     def run(self):
         print(__name__, "started!")
