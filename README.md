@@ -8,11 +8,9 @@ Get source code
 ```shell script
 git clone https://github.com/sourcerer2/browserBot.git
 ```
-In case you're having problems with QT_DEVICE_PIXEL_RATIO
+*In case you're having problems with QT_DEVICE_PIXEL_RATIO*
 ```shell script
-chmod u=rwx QT_DEVICE.sh
-
-./QT_DEVICE.sh
+chmod 700 QT_DEVICE.sh && ./QT_DEVICE.sh
 ```
 
 ### Dependancies
@@ -20,11 +18,13 @@ chmod u=rwx QT_DEVICE.sh
 ```shell script
 pip3 install -r requirements.txt
 ```
-#### Pypy Compiler
+##### Pypy Compiler
 ```shell script
 pypy3 -m ensurepip
 pypy3 -m pip install -r requirements.txt
 ```
+#### Browser
+*NOTE: attendClass module uses Firefox as its standard browser*
 
 ## [API Reference](https://github.com/mstr-Wolf/browserBot/tree/master/docs)
 
