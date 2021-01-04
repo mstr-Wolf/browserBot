@@ -19,7 +19,7 @@ class Clockwork():
         print("Process scheduled to", self.__target.format_datetime(), "\n")
         while True:
             print(self.get_time().format_datetime(), end="\r")
-            if self.__time_now == self.__target or self.__time_now > self.__target:
+            if self.__time_now >= self.__target:
                 print("Time reached\nStarting process...")
                 try:
                     self.execute()
