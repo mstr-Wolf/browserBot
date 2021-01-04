@@ -54,10 +54,15 @@ class AttendClass(Clockwork):
         start_time = self._Clockwork__time_now
 
         self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
-        self.doLogin()
+        log = self.doLogin()
+        if log == False:
+            print("ERROR\nLogin failed. Check your internet, password and try again!")
+            self.driver.close()
+            return
         try: self.driver.get(self.MEET_URL)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR\nMeeting code was not properly set. Please, provide a valid one and try again!")
+            self.driver.close()
             return
 
         print("Login time: ", self.get_time() - start_time)
@@ -108,14 +113,18 @@ class GoogleClass(AttendClass):
         self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
         self.driver.find_element_by_id("identifierNext").click()
 
-        try: self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
-        except selenium.common.exceptions.NoSuchElementException:
-            sec = 6
-            print("{0}\nGoogle took to long to respond! Trying password again in {1} seconds\n{0}".format("*"*40, sec))
-            sleep(sec)
-            self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
+        for count in range(15):
+            try:
+                self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
+                break
+            except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
+                sleep(1)
 
-        self.driver.find_element_by_id("passwordNext").click()
+        try:
+            self.driver.find_element_by_id("passwordNext").click()
+            return True
+        except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
+            return False
 
     def set_meeting_code(self, meeting_code):
         try:
@@ -157,12 +166,17 @@ class ZoomClass(GoogleClass):
         start_time = self._Clockwork__time_now
 
         self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
-        self.doLogin()
+        log = self.doLogin()
+        if log == False:
+            print("ERROR\nLogin failed. Check your internet, password and try again!")
+            self.driver.close()
+            return
         try:
             self.driver.get(self.MEET_URL)
             self.driver.find_elements_by_tag_name("a")[4].click()
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR\nMeeting code was not properly set. Please, provide a valid one and try again!")
+            self.driver.close()
             return
         self.driver.find_element_by_id("joinBtn").click()
 
