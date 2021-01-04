@@ -1,1 +1,1 @@
-from .attendClass import AttendClass, AutomaticLogin, ZoomClass
+from .attendClass import AttendClass, GoogleClass, ZoomClass
