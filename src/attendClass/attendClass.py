@@ -101,7 +101,7 @@ class AutomaticLogin(AttendClass):
         return
 
     def getLoginData(self):
-        user = str(input("Meet's user: "))
+        user = str(input("User: "))
         passwd = getpass("Password: ")
         return {"user": user, "passwd": passwd}
 
@@ -110,9 +110,11 @@ class AutomaticLogin(AttendClass):
         self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
         self.driver.find_element_by_id("identifierNext").click()
 
-        try:
-            self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
+        try: self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
         except selenium.common.exceptions.NoSuchElementException:
-            sleep(6)
+            sec = 6
+            print("{0}\nGoogle took to long to respond! Trying password again in {1} seconds\n{0}".format("*"*40, sec))
+            sleep(sec)
             self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
+
         self.driver.find_element_by_id("passwordNext").click()
