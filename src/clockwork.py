@@ -9,14 +9,17 @@ class Clockwork():
             self.__target = self.__time_now.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = 0)
         except KeyError:
             print("Time not provided!")
-            sys.exit(1)
+            sys.exit()
+        except (ValueError, TypeError):
+            print("Invalid time values!")
+            sys.exit()
 
     def run(self):
         print(__name__, "started!")
         print("Process scheduled to", self.__target.format_datetime(), "\n")
         while True:
             print(self.get_time().format_datetime(), end="\r")
-            if self.__time_now == self.__target or self.__time_now > self.__target:
+            if self.__time_now >= self.__target:
                 print("Time reached\nStarting process...")
                 try:
                     self.execute()

@@ -1,28 +1,57 @@
 import sys
 from datetime import timedelta
 from time import sleep
+from getpass import getpass
+
+from clockwork import Clockwork
+from attendClass.utils import assert_meeting_code
 
 import selenium.common.exceptions
-from clockwork import Clockwork
-from selenium import webdriver
+from selenium.webdriver.firefox.webdriver import WebDriver
+
+import os
+EXECUTABLE_PATH = os.environ["HOME"] + "/geckodriver"
+
 
 
 class AttendClass(Clockwork):
-    def __init__(self, code = "aaabbbbccc", class_length = 90, **kwargs):
+    def __init__(self, **kwargs):
         """
         Parameters:\n
             'code' (string): Meeting code\n
             'class_length' (float): Class lenght (in minutes)\n
-            'kwargs["hour"]' (int): Class' start hour\n
-            'kwargs["minute"]' (int): Class' start minute\n
+            'hour' (int): Class' start hour\n
+            'minute' (int): Class' start minute\n
         """
+
         super().__init__(**kwargs)
-        self.MEET_URL = assert_meeting_code(code, 10, 12)
         self.driver = None
-        self.length = class_length
+        try:
+            self.MEET_URL = assert_meeting_code(kwargs["code"], 10, 12)
+            self.length = float(kwargs["class_length"])
+        except KeyError:
+            print("ERROR\n********\nSome parameters may be missing! Check 'help(AttendClass)' for more details")
+        except (TypeError, ValueError):
+            print("ERROR\n********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details")
+
+    def run(self):
+        print(__name__, "started!")
+        print("Process scheduled to", self._Clockwork__target.format_datetime(), "\n")
+        while True:
+            print(self.get_time().format_datetime(), end="\r")
+            if self._Clockwork__time_now == self._Clockwork__target or self._Clockwork__time_now > self._Clockwork__target:
+                print("Time reached\nStarting process...")
+                try:
+                    self.execute()
+                    sys.exit(0)
+                except selenium.common.exceptions.WebDriverException:
+                    print("EXECUTABLE ERROR!\nCheck 'selenium.common.exceptions.WebDriverException' for more informations!\n")
+                    print("*"*70)
+                    raise selenium.common.exceptions.WebDriverException
+            sleep(1)
 
     def execute(self, **kwargs):
-        self.driver = webdriver.Chrome()
+        self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
         self.driver.get(self.MEET_URL)
 
         shutTime = self.get_class_duration()
@@ -44,68 +73,48 @@ class AttendClass(Clockwork):
         hours = int((self.length-minutes)/60)
         return hours, minutes
 
-def assert_meeting_code(meeting_code, min_len, max_len):
-    try: meeting_code + "STRING_TEST"
-    except TypeError:
-        print("Meeting code must be string!")
-        sys.exit(0)
 
-    code_len = len(meeting_code)
-    if code_len != max_len and code_len != min_len:
-        print("Meeting code not accepted! Please check again")
-        sys.exit(0)
-    elif (code_len == max_len and meeting_code[3] == "-" and meeting_code[8] == "-") or code_len == min_len:
-        for crc in meeting_code:
-            try:
-                int(crc)
-                print("Numbers are not accepted!")
-                sys.exit(0)
-            except ValueError: continue
-        return "https://meet.google.com/%s" % meeting_code
 
 class AutomaticLogin(AttendClass):
-    def __init__(self, user_login, user_passwd, automatic_wait_time = 3, code = "aaabbbbccc", class_length = 90, **kwargs):
+    def __init__(self, **kwargs):
         """
         Parameters:\n
-            'user_login' (string): User's e-mail or phone number\n
-            'user_passwd' (string): User's password\n
-            'automatic_wait_time' (int): wait time between 'doLogin()' method steps\n
             'code' (string): Meeting code\n
             'class_length' (float): Class lenght (in minutes)\n
-            'kwargs["hour"]' (int): Class' start hour\n
-            'kwargs["minute"]' (int): Class' start minute\n
+            'hour' (int): Class' start hour\n
+            'minute' (int): Class' start minute\n
         """
-        super().__init__(code, class_length, **kwargs)
-
-        self.passwd = user_passwd
-        self.login = user_login
-        self.wait_time = automatic_wait_time
+        super().__init__(**kwargs)
         self.login_url = "https://accounts.google.com/Login?hl=pt-BR"
+        self.loginData = self.getLoginData()
 
     def execute(self, **kwargs):
         start_time = self._Clockwork__time_now
-        self.driver = webdriver.Chrome()
-        self.doLogin()
 
+        self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
+        self.doLogin()
         self.driver.get(self.MEET_URL)
-        #enter class
 
         print("Login time: ", self.get_time() - start_time)
         shutTime = self.get_class_duration()
         self.shutdownConnection(hours = shutTime[0], minutes = shutTime[1])
         return
 
+    def getLoginData(self):
+        user = str(input("User: "))
+        passwd = getpass("Password: ")
+        return {"user": user, "passwd": passwd}
+
     def doLogin(self):
         self.driver.get(self.login_url)
-        self.driver.find_element_by_id("identifierId").send_keys(self.login)
+        self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
         self.driver.find_element_by_id("identifierNext").click()
 
-        try:
-            self.driver.find_element_by_name("password").send_keys(self.passwd)
+        try: self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
         except selenium.common.exceptions.NoSuchElementException:
-            sleep(self.wait_time)
-            self.driver.find_element_by_name("password").send_keys(self.passwd)
-        self.driver.find_element_by_id("passwordNext").click()
+            sec = 6
+            print("{0}\nGoogle took to long to respond! Trying password again in {1} seconds\n{0}".format("*"*40, sec))
+            sleep(sec)
+            self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
 
-        sleep(self.wait_time)
-        self.driver.get("https://meet.google.com")
+        self.driver.find_element_by_id("passwordNext").click()
