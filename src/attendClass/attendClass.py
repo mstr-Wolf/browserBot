@@ -30,9 +30,9 @@ class AttendClass(Clockwork):
             self.MEET_URL = assert_meeting_code(kwargs["code"], 10, 12)
             self.length = float(kwargs["class_length"])
         except KeyError:
-            print("ERROR\nSome parameters may be missing! Check 'help(AttendClass)' for more details")
-        except TypeError:
-            print("ERROR\n'length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details")
+            print("ERROR\n********\nSome parameters may be missing! Check 'help(AttendClass)' for more details")
+        except (TypeError, ValueError):
+            print("ERROR\n********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details")
 
     def run(self):
         print(__name__, "started!")

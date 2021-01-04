@@ -10,7 +10,7 @@ class Clockwork():
         except KeyError:
             print("Time not provided!")
             sys.exit()
-        except TypeError:
+        except (ValueError, TypeError):
             print("Invalid time values!")
             sys.exit()
 
