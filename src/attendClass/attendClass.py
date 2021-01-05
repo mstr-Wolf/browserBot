@@ -1,4 +1,3 @@
-import sys
 from datetime import timedelta
 from time import sleep
 from getpass import getpass
@@ -33,7 +32,7 @@ class AttendClass(Clockwork):
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
         except (TypeError, ValueError): print("ERROR ****** ********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details ******")
 
-        self.loginData = self.getLoginData()
+        self.getLoginData()
 
     def run(self):
         print("Process scheduled to", self._Clockwork__target.format_datetime(), "\n")
@@ -71,11 +70,11 @@ class AttendClass(Clockwork):
         minutes = self.length%60
         hours = int((self.length-minutes)/60)
         return hours, minutes
-    
+
     def getLoginData(self):
         user = str(input("User: "))
         passwd = getpass("Password: ")
-        return {"user": user, "passwd": passwd}
+        self.loginData = {"user": user, "passwd": passwd}
 
     def execute(self, **kwargs): raise NotImplementedError
 
@@ -116,7 +115,7 @@ class GoogleClass(AttendClass):
         self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
         self.driver.find_element_by_id("identifierNext").click()
 
-        for count in range(15):
+        for _ in range(15):
             try:
                 self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
                 break

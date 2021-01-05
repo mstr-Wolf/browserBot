@@ -1,8 +1,6 @@
 # browserBot
 browserBot is a easy way to schedule and control browser actions. From scheduling youtube videos, sending whatsapp messages, to even attending to classes. Let your imagination drive you, build with browserBot!
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9babc73436334c38b139c2d3be998ee1)](https://app.codacy.com/gh/mstr-Wolf/browserBot?utm_source=github.com&utm_medium=referral&utm_content=mstr-Wolf/browserBot&utm_campaign=Badge_Grade)
-
 ## Installation
 Get source code
 ```shell script
