@@ -24,7 +24,7 @@ class Clockwork():
                 try:
                     self.execute()
                 except:
-                    print("ERROR TRYING TO GET URL")
+                    print("EXECUTION ERROR")
                 finally:
                     sys.exit(0)
             sleep(1)
