@@ -28,7 +28,7 @@ class AttendClass(Clockwork):
 
         try:
             self.length = float(kwargs["class_length"])
-            self.set_meeting_code(kwargs["code"])
+            self.set_meeting_code(meeting_code = kwargs["code"])
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
         except (TypeError, ValueError): print("ERROR ****** ********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details ******")
 
@@ -80,7 +80,7 @@ class AttendClass(Clockwork):
 
     def doLogin(self): raise NotImplementedError
 
-    def set_meeting_code(self, meeting_code): raise NotImplementedError
+    def set_meeting_code(self, **kwargs): raise NotImplementedError
 
 
 
@@ -136,27 +136,27 @@ class GoogleClass(AttendClass):
                 return
         print("Login time: ", self.get_time() - start_time)
 
-    def set_meeting_code(self, meeting_code):
+    def set_meeting_code(self, **kwargs):
         try:
-            meeting_code + "STRING_TEST"
+            kwargs["meeting_code"] + "STRING_TEST"
         except TypeError:
             print("ERROR ****** Meeting code must be string! ******")
             self.MEET_URL =  ""
             return
 
-        code_len = len(meeting_code)
+        code_len = len(kwargs["meeting_code"])
         if code_len != 12 and code_len != 10:
             print("ERROR ****** Meeting code not accepted! Please check again ******")
             self.MEET_URL =  ""
-        elif (code_len == 12 and meeting_code[3] == "-" and meeting_code[8] == "-") or code_len == 10:
-            for crc in meeting_code:
+        elif (code_len == 12 and kwargs["meeting_code"][3] == "-" and kwargs["meeting_code"][8] == "-") or code_len == 10:
+            for crc in kwargs["meeting_code"]:
                 try:
                     int(crc)
                     print("ERROR ****** Meeting code must not contain numbers! ******")
                     self.MEET_URL =  ""
                     return
                 except ValueError: continue
-            self.MEET_URL="https://meet.google.com/%s" % meeting_code
+            self.MEET_URL="https://meet.google.com/%s" % kwargs["meeting_code"]
 
 
 
@@ -188,7 +188,7 @@ class ZoomClass(GoogleClass):
         self.driver.find_element_by_id("joinBtn").click()
         return
 
-    def set_meeting_code(self, meeting_code):
-        if "https://zoom.us/j/" in meeting_code:
-            self.MEET_URL = meeting_code
-        else: self.MEET_URL="https://zoom.us/j/%s" % meeting_code
+    def set_meeting_code(self, **kwargs):
+        if "https://zoom.us/j/" in kwargs["meeting_code"]:
+            self.MEET_URL = kwargs["meeting_code"]
+        else: self.MEET_URL="https://zoom.us/j/%s" % kwargs["meeting_code"]
