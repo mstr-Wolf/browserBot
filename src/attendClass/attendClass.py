@@ -23,19 +23,19 @@ class AttendClass(Clockwork):
             'minute' (int): Class' start minute\n
         """
         super().__init__(**kwargs)
+        print(__name__, "started!")
         self.driver = None
         self.login_url = ""
 
         try:
             self.length = float(kwargs["class_length"])
             self.set_meeting_code(kwargs["code"])
-        except KeyError: print("ERROR\n********\nSome parameters may be missing! Check 'help(AttendClass)' for more details")
-        except (TypeError, ValueError): print("ERROR\n********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details")
+        except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
+        except (TypeError, ValueError): print("ERROR ****** ********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details ******")
 
         self.loginData = self.getLoginData()
 
     def run(self):
-        print(__name__, "started!")
         print("Process scheduled to", self._Clockwork__target.format_datetime(), "\n")
         while True:
             print(self.get_time().format_datetime(), end="\r")
@@ -43,34 +43,21 @@ class AttendClass(Clockwork):
                 print("Time reached\nStarting process...")
                 try:
                     self.execute()
-                    sys.exit(0)
+                    shutTime = self.get_class_length()
+                    self.shutdownConnection(hours = shutTime[0], minutes = shutTime[1])
+                    break
                 except selenium.common.exceptions.WebDriverException:
                     print("EXECUTABLE ERROR!\nCheck 'selenium.common.exceptions.WebDriverException' for more informations!\n")
                     print("*"*70)
                     raise selenium.common.exceptions.WebDriverException
             sleep(1)
 
-    def execute(self, **kwargs):
-        start_time = self._Clockwork__time_now
-
-        self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
-        log = self.doLogin()
-        if log == False:
-            print("ERROR\nLogin failed. Check your internet, password and try again!")
-            self.driver.close()
-            return
-        try: self.driver.get(self.MEET_URL)
-        except selenium.common.exceptions.InvalidArgumentException:
-            print("ERROR\nMeeting code was not properly set. Please, provide a valid one and try again!")
-            self.driver.close()
-            return
-
-        print("Login time: ", self.get_time() - start_time)
-        shutTime = self.get_class_length()
-        self.shutdownConnection(hours = shutTime[0], minutes = shutTime[1])
-        return
-
     def shutdownConnection(self, **kwargs):
+        try: self.driver.close()
+        except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
+            print("ERROR ****** Browser driver not implemented or it's already closed! ******")
+            return
+
         self._Clockwork__target = self.get_time() + timedelta(hours=kwargs["hours"], minutes=kwargs["minutes"])
         print("Kill scheduled to", self._Clockwork__target.format_datetime())
         while True:
@@ -90,6 +77,8 @@ class AttendClass(Clockwork):
         passwd = getpass("Password: ")
         return {"user": user, "passwd": passwd}
 
+    def execute(self, **kwargs): raise NotImplementedError
+
     def doLogin(self): raise NotImplementedError
 
     def set_meeting_code(self, meeting_code): raise NotImplementedError
@@ -108,8 +97,22 @@ class GoogleClass(AttendClass):
         super().__init__(**kwargs)
         self.login_url = "https://accounts.google.com/Login?hl=pt-BR"
 
+    def execute(self, **kwargs):
+        self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
+        self.doLogin()
+
+        try: self.driver.get(self.MEET_URL)
+        except selenium.common.exceptions.InvalidArgumentException:
+            print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
+            self.driver.close()
+        except selenium.common.exceptions.InvalidSessionIdException:
+            return
+        return
+
     def doLogin(self):
+        start_time = self._Clockwork__time_now
         self.driver.get(self.login_url)
+
         self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
         self.driver.find_element_by_id("identifierNext").click()
 
@@ -122,27 +125,35 @@ class GoogleClass(AttendClass):
 
         try:
             self.driver.find_element_by_id("passwordNext").click()
-            return True
+            try:
+                if self.driver.find_element_by_class_name("EjBTad"):
+                    print("ERROR ****** Login failed. Check your password and try again! ******")
+                    self.driver.close()
+                    return
+            except selenium.common.exceptions.NoSuchElementException: pass
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
-            return False
+                print("ERROR ****** Login failed. Check your connection and try again! ******")
+                self.driver.close()
+                return
+        print("Login time: ", self.get_time() - start_time)
 
     def set_meeting_code(self, meeting_code):
         try:
             meeting_code + "STRING_TEST"
         except TypeError:
-            print("Meeting code must be string!")
+            print("ERROR ****** Meeting code must be string! ******")
             self.MEET_URL =  ""
             return
 
         code_len = len(meeting_code)
         if code_len != 12 and code_len != 10:
-            print("Meeting code not accepted! Please check again")
+            print("ERROR ****** Meeting code not accepted! Please check again ******")
             self.MEET_URL =  ""
         elif (code_len == 12 and meeting_code[3] == "-" and meeting_code[8] == "-") or code_len == 10:
             for crc in meeting_code:
                 try:
                     int(crc)
-                    print("Numbers are not accepted!")
+                    print("ERROR ****** Meeting code must not contain numbers! ******")
                     self.MEET_URL =  ""
                     return
                 except ValueError: continue
@@ -163,26 +174,19 @@ class ZoomClass(GoogleClass):
         self.login_url = "https://zoom.us/google_oauth_signin"
 
     def execute(self, **kwargs):
-        start_time = self._Clockwork__time_now
-
         self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
-        log = self.doLogin()
-        if log == False:
-            print("ERROR\nLogin failed. Check your internet, password and try again!")
-            self.driver.close()
-            return
+        self.doLogin()
+
         try:
             self.driver.get(self.MEET_URL)
             self.driver.find_elements_by_tag_name("a")[4].click()
-        except selenium.common.exceptions.InvalidArgumentException:
-            print("ERROR\nMeeting code was not properly set. Please, provide a valid one and try again!")
+        except (selenium.common.exceptions.InvalidArgumentException, selenium.common.exceptions.NoSuchElementException):
+            print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             self.driver.close()
             return
+        except selenium.common.exceptions.InvalidSessionIdException:
+            return
         self.driver.find_element_by_id("joinBtn").click()
-
-        print("Login time: ", self.get_time() - start_time)
-        shutTime = self.get_class_length()
-        self.shutdownConnection(hours = shutTime[0], minutes = shutTime[1])
         return
 
     def set_meeting_code(self, meeting_code):
