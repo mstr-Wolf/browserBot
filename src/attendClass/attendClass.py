@@ -1,4 +1,3 @@
-from datetime import timedelta
 from time import sleep
 from getpass import getpass
 
@@ -35,15 +34,15 @@ class AttendClass(Clockwork):
         self.getLoginData()
 
     def run(self):
-        print("Process scheduled to", self._Clockwork__target.format_datetime(), "\n")
+        print("Process scheduled to", self.get_target().format_datetime(), "\n")
         while True:
             print(self.get_time().format_datetime(), end="\r")
-            if self._Clockwork__time_now >= self._Clockwork__target:
+            if self.get_time() >= self.get_target():
                 print("Time reached\nStarting process...")
                 try:
                     self.execute()
                     shutTime = self.get_class_length()
-                    self.shutdownConnection(hours = shutTime[0], minutes = shutTime[1])
+                    self.shutdownConnection(hour = shutTime[0], minute = shutTime[1])
                     break
                 except selenium.common.exceptions.WebDriverException:
                     print("EXECUTABLE ERROR!\nCheck 'selenium.common.exceptions.WebDriverException' for more informations!\n")
@@ -57,10 +56,10 @@ class AttendClass(Clockwork):
             print("ERROR ****** Browser driver not implemented or it's already closed! ******")
             return
 
-        self._Clockwork__target = self.get_time() + timedelta(hours=kwargs["hours"], minutes=kwargs["minutes"])
-        print("Kill scheduled to", self._Clockwork__target.format_datetime())
+        self.reset_target(hour=kwargs["hour"], minute=kwargs["minute"])
+        print("Kill scheduled to", self.get_target().format_datetime())
         while True:
-            if self.get_time() == self._Clockwork__target or self.get_time() > self._Clockwork__target:
+            if self.get_time() == self.get_target() or self.get_time() > self.get_target():
                 self.driver.close()
                 break
             sleep(1)
@@ -109,7 +108,7 @@ class GoogleClass(AttendClass):
         return
 
     def doLogin(self):
-        start_time = self._Clockwork__time_now
+        start_time = self.get_time()
         self.driver.get(self.login_url)
 
         self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
