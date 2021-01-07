@@ -1,4 +1,5 @@
 from time import sleep
+from sys import exit
 from getpass import getpass
 
 from clockwork import Clockwork
@@ -41,8 +42,7 @@ class AttendClass(Clockwork):
                 print("Time reached\nStarting process...")
                 try:
                     self.execute()
-                    shutTime = self.get_class_length()
-                    self.shutdownConnection(hour = shutTime[0], minute = shutTime[1])
+                    self.shutdownConnection()
                     break
                 except selenium.common.exceptions.WebDriverException:
                     print("EXECUTABLE ERROR!\nCheck 'selenium.common.exceptions.WebDriverException' for more informations!\n")
@@ -51,24 +51,38 @@ class AttendClass(Clockwork):
             sleep(1)
 
     def shutdownConnection(self, **kwargs):
-        try: self.driver.close()
-        except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
-            print("ERROR ****** Browser driver not implemented or it's already closed! ******")
+        try: self.driver.current_url
+        except selenium.common.exceptions.InvalidSessionIdException:
+            self.close_drive()
+
+        shutTime = self.get_class_length()
+        if len(shutTime) == 3:
+            self.delay_target(hour = shutTime[0], minute = shutTime[1], second = shutTime[2])
+        elif len(shutTime) == 2:
+            self.delay_target(hour = shutTime[0], minute = shutTime[1])
+        else:
+            print("ERROR ****** Length may not be defined. Check AttendClass.length and AttendClass.get_class_length for more information!")
+            self.close_drive()
             return
 
-        self.reset_target(hour=kwargs["hour"], minute=kwargs["minute"])
         print("Kill scheduled to", self.get_target().format_datetime())
         while True:
-            if self.get_time() == self.get_target() or self.get_time() > self.get_target():
-                self.driver.close()
+            if self.get_time() >= self.get_target():
+                self.close_drive()
                 break
             sleep(1)
         return
 
     def get_class_length(self, **kwargs):
         minutes = self.length%60
-        hours = int((self.length-minutes)/60)
-        return hours, minutes
+        if minutes < 0:
+            seconds = minutes * 60
+            minutes = 0
+            hours = int((self.length-minutes)/60)
+            return hours, minutes, seconds
+        else:
+            hours = int((self.length-minutes)/60)
+            return hours, minutes
 
     def getLoginData(self):
         user = str(input("User: "))
@@ -76,6 +90,12 @@ class AttendClass(Clockwork):
         self.loginData = {"user": user, "passwd": passwd}
 
     def execute(self, **kwargs): raise NotImplementedError
+
+    def close_drive(self, **kwargs):
+        try: self.driver.close()
+        except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
+            print("ERROR ****** Browser driver not implemented or it's already closed! ******")
+            exit()
 
     def doLogin(self): raise NotImplementedError
 
@@ -102,7 +122,7 @@ class GoogleClass(AttendClass):
         try: self.driver.get(self.MEET_URL)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
-            self.driver.close()
+            self.close_drive()
         except selenium.common.exceptions.InvalidSessionIdException:
             return
         return
@@ -126,12 +146,12 @@ class GoogleClass(AttendClass):
             try:
                 if self.driver.find_element_by_class_name("EjBTad"):
                     print("ERROR ****** Login failed. Check your password and try again! ******")
-                    self.driver.close()
+                    self.close_drive()
                     return
             except selenium.common.exceptions.NoSuchElementException: pass
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
                 print("ERROR ****** Login failed. Check your connection and try again! ******")
-                self.driver.close()
+                self.close_drive()
                 return
         print("Login time: ", self.get_time() - start_time)
 
@@ -180,7 +200,7 @@ class ZoomClass(GoogleClass):
             self.driver.find_elements_by_tag_name("a")[4].click()
         except (selenium.common.exceptions.InvalidArgumentException, selenium.common.exceptions.NoSuchElementException):
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
-            self.driver.close()
+            self.close_drive()
             return
         except selenium.common.exceptions.InvalidSessionIdException:
             return
