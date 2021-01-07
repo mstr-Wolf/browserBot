@@ -1,4 +1,5 @@
 from delorean import Delorean
+from datetime import timedelta
 from time import sleep
 import sys
 
@@ -40,4 +41,7 @@ class Clockwork():
         return self.__target
 
     def reset_target(self, **kwargs):
-        self.__target = self.__time_now.now().replace(hour = kwargs["hour"], minute = kwargs["minute"], second = 0)
+        self.__target = self.__target.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = 0)
+
+    def delay_target(self, **kwargs):
+        self.__target = self.get_time() + timedelta(hours=kwargs["hour"], minutes=kwargs["minute"])
