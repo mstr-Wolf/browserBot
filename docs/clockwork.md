@@ -56,3 +56,51 @@ def execute(self, **kwargs):
 
 ##### Returns
 - None
+
+## get_time Method
+```python
+def get_time(self):
+        self.__time_now = self.__time_now.now()
+        self.__time_now.truncate("second")
+        return self.__time_now
+```
+##### Description
+Returns Clockwork.__time_now (mainly) for child classes
+
+##### Returns
+- Delorean
+
+
+## get_target Method
+```python
+def get_target(self):
+    return self.__target
+```
+##### Description
+Returns Clockwork.__target (mainly) for child classes
+
+##### Returns
+- Delorean
+
+
+## reset_target Method
+```python
+def reset_target(self, **kwargs):
+    self.__target = self.__target.replace(hour = kwargs["hour"], minute = kwargs["minute"], second = 0)
+```
+##### Description
+Updates Clockwork.__target with any given hour and minute. Seconds are 0 as standard.
+
+##### Returns
+- None
+
+## delay_target Method
+```python
+def delay_target(self, **kwargs):
+    self.__target = self.get_time() + timedelta(hours=kwargs["hour"], minutes=kwargs["minute"])
+```
+##### Description
+Delays Clockwork.__target (only forward) with a given hour and minute. Seconds are the same as to Clockwork.__time_now.
+
+##### Returns
+- None
