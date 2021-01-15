@@ -1,5 +1,9 @@
 # browserBot
-browserBot is a easy way to schedule and control browser actions. From scheduling youtube videos, sending whatsapp messages, to even attending to classes. Let your imagination drive you, build with browserBot!
+Attending online classes? Scraping website data? Building bots? 
+
+'browserBot' is a easy way to automate web through your browser. 
+
+Let your imagination drive you...
 
 ## Installation
 Get source code
