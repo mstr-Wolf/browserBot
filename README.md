@@ -10,7 +10,7 @@ Get source code
 ```shell script
 git clone https://github.com/sourcerer2/browserBot.git && cd browserBot
 
-# In case you're having problems with QT_DEVICE_PIXEL_RATIO
+# In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
 ```
 
