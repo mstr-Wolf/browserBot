@@ -28,7 +28,9 @@ pip3 install -r requirements.txt
 ./gecko-install
 ```
 
-## [API Reference](https://github.com/mstr-Wolf/browserBot/tree/master/docs)
+## Docs
+- [Clockwork API Reference](https://github.com/sourcerer2/browserBot/blob/master/docs/clockwork.md)
+- [AttendClass Basic Usage](https://github.com/sourcerer2/browserBot/blob/master/docs/attendClass.md)
 
 ## Contributing & Issue Tracker
 - [Issues](https://github.com/mstr-Wolf/browserBot/issues)
