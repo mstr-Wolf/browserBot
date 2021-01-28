@@ -39,6 +39,7 @@ class AttendClass(Clockwork):
             if self.get_time() >= self.get_target():
                 print("Time reached\nStarting process...")
                 try:
+                    self.set_driver()
                     self.execute()
                     self.shutdownConnection()
                     break
@@ -49,7 +50,7 @@ class AttendClass(Clockwork):
             sleep(1)
 
     def shutdownConnection(self, **kwargs):
-        try: self.driver.current_url
+        try: self.get_driver.current_url
         except selenium.common.exceptions.InvalidSessionIdException:
             self.close_drive()
 
@@ -74,7 +75,7 @@ class AttendClass(Clockwork):
     def execute(self, **kwargs): raise NotImplementedError
 
     def close_drive(self, **kwargs):
-        try: self.driver.close()
+        try: self.get_driver.close()
         except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
             print("ERROR ****** Browser driver not implemented or it's already closed! ******")
             exit()
@@ -106,6 +107,12 @@ class AttendClass(Clockwork):
 
     def get_login_url(self): return self.__login_url
 
+    def set_driver(self, **kwargs):
+        if kwargs["browser"] == "firefox": self.__driver = WebDriver(executable_path=EXECUTABLE_PATH)
+        else: self.__driver = None
+
+    def get_driver(self): return self.__driver
+
 
 
 class GoogleClass(AttendClass):
@@ -121,10 +128,9 @@ class GoogleClass(AttendClass):
         self.set_login_url(url="https://accounts.google.com/Login?hl=pt-BR")
 
     def execute(self, **kwargs):
-        self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
         self.doLogin()
 
-        try: self.driver.get(self.MEET_URL)
+        try: self.get_driver.get(self.meet_url)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             self.close_drive()
@@ -134,14 +140,14 @@ class GoogleClass(AttendClass):
 
     def doLogin(self):
         start_time = self.get_time()
-        self.driver.get(self.get_login_url())
+        self.get_driver.get(self.get_login_url())
 
         #USER
         try:
-            self.driver.find_element_by_id("identifierId").send_keys(self.getLogiself.driver.find_element_by_name("password").send_keys(self.getLoginData()["user"]))
-            self.driver.find_element_by_id("identifierNext").click()
+            self.get_driver.find_element_by_id("identifierId").send_keys(self.getLogiself.get_driver.find_element_by_name("password").send_keys(self.getLoginData()["user"]))
+            self.get_driver.find_element_by_id("identifierNext").click()
             try:
-                if self.driver.find_element_by_class_name("o6cuMc"):
+                if self.get_driver.find_element_by_class_name("o6cuMc"):
                     print("ERROR ****** Login failed. Check user and try again! ******")
                     self.close_drive()
                     return
@@ -154,14 +160,14 @@ class GoogleClass(AttendClass):
         #PASSWORD
         for _ in range(15):
             try:
-                self.driver.find_element_by_name("password").send_keys(self.getLoginData()["passwd"])
+                self.get_driver.find_element_by_name("password").send_keys(self.getLoginData()["passwd"])
                 break
             except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
                 sleep(1)
         try:
-            self.driver.find_element_by_id("passwordNext").click()
+            self.get_driver.find_element_by_id("passwordNext").click()
             try:
-                if self.driver.find_element_by_class_name("EjBTad"):
+                if self.get_driver.find_element_by_class_name("EjBTad"):
                     print("ERROR ****** Login failed. Check your password and try again! ******")
                     self.close_drive()
                     return
@@ -177,22 +183,22 @@ class GoogleClass(AttendClass):
             kwargs["meeting_code"] + "STRING_TEST"
         except TypeError:
             print("ERROR ****** Meeting code must be string! ******")
-            self.MEET_URL =  ""
+            self.meet_url =  ""
             return
 
         code_len = len(kwargs["meeting_code"])
         if code_len != 12 and code_len != 10:
             print("ERROR ****** Meeting code not accepted! Please check again ******")
-            self.MEET_URL =  ""
+            self.meet_url =  ""
         elif (code_len == 12 and kwargs["meeting_code"][3] == "-" and kwargs["meeting_code"][8] == "-") or code_len == 10:
             for crc in kwargs["meeting_code"]:
                 try:
                     int(crc)
                     print("ERROR ****** Meeting code must not contain numbers! ******")
-                    self.MEET_URL =  ""
+                    self.meet_url =  ""
                     return
                 except ValueError: continue
-            self.MEET_URL="https://meet.google.com/%s" % kwargs["meeting_code"]
+            self.meet_url="https://meet.google.com/%s" % kwargs["meeting_code"]
 
 
 
@@ -209,22 +215,21 @@ class ZoomClass(GoogleClass):
         self.set_login_url(url="https://zoom.us/google_oauth_signin")
 
     def execute(self, **kwargs):
-        self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
         self.doLogin()
 
         try:
-            self.driver.get(self.MEET_URL)
-            self.driver.find_elements_by_tag_name("a")[4].click()
+            self.get_driver.get(self.meet_url)
+            self.get_driver.find_elements_by_tag_name("a")[4].click()
         except (selenium.common.exceptions.InvalidArgumentException, selenium.common.exceptions.NoSuchElementException):
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             self.close_drive()
             return
         except selenium.common.exceptions.InvalidSessionIdException:
             return
-        self.driver.find_element_by_id("joinBtn").click()
+        self.get_driver.find_element_by_id("joinBtn").click()
         return
 
     def set_meeting_code(self, **kwargs):
         if "https://zoom.us/j/" in kwargs["meeting_code"]:
-            self.MEET_URL = kwargs["meeting_code"]
-        else: self.MEET_URL="https://zoom.us/j/%s" % kwargs["meeting_code"]
+            self.meet_url = kwargs["meeting_code"]
+        else: self.meet_url="https://zoom.us/j/%s" % kwargs["meeting_code"]

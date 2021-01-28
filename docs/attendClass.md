@@ -28,23 +28,51 @@ elif __name__ == "__main__" and len(sys.argv) != 6:
 
 ## Attributes
 ### self.length
-- Description: Intended class time
+```
+- Description: Intended time to close driver
 - Type: float
 - Note: 'self.set_class_length' returns hour, minute and, if necessary, second, from the float value of 'self.length'
+```
 
-### self.MEET_URL
+### self.meet_url
+```
 - Description: Intended class url, given a certain code
 - Type: string
 - Setter: self.set_meeting_code()
+```
 
-### self.loginData
+### self.__loginData
+```
 - Description: User's login and password
 - Type: dictionary
 - Setter: self.setLoginData()
 - Getter: self.getLoginData()
+```
 
-### self.login_url
+### self.__driver
+```
+- Description: Class' selenium driver (Firefox as standard)
+- Type: WebDriver (class)
+- Setter: self.set_driver()
+- Getter: self.get_driver()
+```
+
+### self.__login_url
+```
 - Description: Account's login url
 - Type: string
 - Setter: self.set_login_url()
 - Getter: self.get_login_url()
+```
+
+## Methods
+
+### Flow
+> Note: Method self.run() calls self.set_driver(), self.execute() and self.shutdownConnection().
+
+- For instant execution:
+```
+self.set_driver()
+self.execute()
+self.shutdownConnection()
+```
