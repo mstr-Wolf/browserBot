@@ -32,7 +32,7 @@ class AttendClass(Clockwork):
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
         except (TypeError, ValueError): print("ERROR ****** ********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details ******")
 
-        self.getLoginData()
+        self.setLoginData()
 
     def run(self):
         print("Process scheduled to", self.get_target().format_datetime(), "\n")
@@ -55,13 +55,13 @@ class AttendClass(Clockwork):
         except selenium.common.exceptions.InvalidSessionIdException:
             self.close_drive()
 
-        shutTime = self.get_class_length()
+        shutTime = self.set_class_length()
         if len(shutTime) == 3:
             self.delay_target(hour = shutTime[0], minute = shutTime[1], second = shutTime[2])
         elif len(shutTime) == 2:
             self.delay_target(hour = shutTime[0], minute = shutTime[1])
         else:
-            print("ERROR ****** Length may not be defined. Check AttendClass.length and AttendClass.get_class_length for more information!")
+            print("ERROR ****** Length may not be defined. Check AttendClass.length and AttendClass.set_class_length for more information!")
             self.close_drive()
             return
 
@@ -73,7 +73,7 @@ class AttendClass(Clockwork):
             sleep(1)
         return
 
-    def get_class_length(self, **kwargs):
+    def set_class_length(self, **kwargs):
         minutes = self.length%60
         if minutes < 0:
             seconds = minutes * 60
@@ -84,7 +84,7 @@ class AttendClass(Clockwork):
             hours = int((self.length-minutes)/60)
             return hours, minutes
 
-    def getLoginData(self):
+    def setLoginData(self):
         user = str(input("User: "))
         passwd = getpass("Password: ")
         self.loginData = {"user": user, "passwd": passwd}
