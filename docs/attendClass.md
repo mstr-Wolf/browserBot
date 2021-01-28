@@ -1,10 +1,10 @@
+# AttendClass Basic Usage
+```python
 import sys
 
-sys.path.append("/home/lo/bin/git/browserBot/src")
+from browserBot.attendClass import GoogleClass, ZoomClass
 
-from attendClass import GoogleClass, ZoomClass
-
-if __name__ == "__main__" and len(sys.argv) >= 5:
+if __name__ == "__main__" and len(sys.argv) == 6:
     sys.argv[1].lower()
     if sys.argv[1] == "meet" or sys.argv[1] == "google":
         try:
@@ -19,6 +19,9 @@ if __name__ == "__main__" and len(sys.argv) >= 5:
         except KeyboardInterrupt:
             sys.exit()
 
-elif __name__ == "__main__" and len(sys.argv) < 5:
+elif __name__ == "__main__" and len(sys.argv) != 6:
     print("Execution example:\n\tpython3 main.py [platform] [code] [length] [target hour] [target minute]")
     print("Platforms:\n\tgoogle (meet)\n\tzoom")
+
+```
+

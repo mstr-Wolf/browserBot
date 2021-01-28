@@ -2,7 +2,7 @@ from time import sleep
 from sys import exit
 from getpass import getpass
 
-from clockwork import Clockwork
+from browserBot.clockwork import Clockwork
 
 import selenium.common.exceptions
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -131,16 +131,28 @@ class GoogleClass(AttendClass):
         start_time = self.get_time()
         self.driver.get(self.login_url)
 
-        self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
-        self.driver.find_element_by_id("identifierNext").click()
-
+        #USER
+        try:
+            self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
+            self.driver.find_element_by_id("identifierNext").click()
+            try:
+                if self.driver.find_element_by_class_name("o6cuMc"):
+                    print("ERROR ****** Login failed. Check user and try again! ******")
+                    self.close_drive()
+                    return
+            except selenium.common.exceptions.NoSuchElementException: pass
+        except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
+            print("ERROR ****** Login failed. Check your connection and try again! ******")
+            self.close_drive()
+            return
+            
+        #PASSWORD
         for _ in range(15):
             try:
                 self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
                 break
             except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
                 sleep(1)
-
         try:
             self.driver.find_element_by_id("passwordNext").click()
             try:
