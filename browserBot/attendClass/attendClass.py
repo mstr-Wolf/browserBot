@@ -73,6 +73,16 @@ class AttendClass(Clockwork):
             sleep(1)
         return
 
+    def execute(self, **kwargs): raise NotImplementedError
+
+    def close_drive(self, **kwargs):
+        try: self.driver.close()
+        except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
+            print("ERROR ****** Browser driver not implemented or it's already closed! ******")
+            exit()
+
+    def doLogin(self): raise NotImplementedError
+
     def set_class_length(self, **kwargs):
         minutes = self.length%60
         if minutes < 0:
@@ -88,16 +98,6 @@ class AttendClass(Clockwork):
         user = str(input("User: "))
         passwd = getpass("Password: ")
         self.loginData = {"user": user, "passwd": passwd}
-
-    def execute(self, **kwargs): raise NotImplementedError
-
-    def close_drive(self, **kwargs):
-        try: self.driver.close()
-        except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
-            print("ERROR ****** Browser driver not implemented or it's already closed! ******")
-            exit()
-
-    def doLogin(self): raise NotImplementedError
 
     def set_meeting_code(self, **kwargs): raise NotImplementedError
 
