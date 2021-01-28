@@ -25,9 +25,7 @@ pip3 install -r requirements.txt
 
 ##### Geckodriver Install (Linux)
 ```shell script
-wget https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-linux32.tar.gz -O $HOME/geckodriver-v0.28.0-linux32.tar.gz --show-progress
-
-tar xvfz geckodriver-v0.28.0-linux32.tar.gz .
+./gecko-install
 ```
 
 ## [API Reference](https://github.com/mstr-Wolf/browserBot/tree/master/docs)
