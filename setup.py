@@ -8,7 +8,7 @@ setuptools.setup(
     version="1.3.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
-    description="A small example package",
+    description="Browser and web automation engine",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer2/browserBot",
