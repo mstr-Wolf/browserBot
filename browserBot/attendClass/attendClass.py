@@ -23,8 +23,6 @@ class AttendClass(Clockwork):
         """
         super().__init__(**kwargs)
         print(__name__, "started!")
-        self.driver = None
-        self.login_url = ""
 
         try:
             self.length = float(kwargs["class_length"])
@@ -97,9 +95,16 @@ class AttendClass(Clockwork):
     def setLoginData(self):
         user = str(input("User: "))
         passwd = getpass("Password: ")
-        self.loginData = {"user": user, "passwd": passwd}
+        self.__loginData = {"user": user, "passwd": passwd}
+
+    def getLoginData(self):
+        return self.__loginData
 
     def set_meeting_code(self, **kwargs): raise NotImplementedError
+
+    def set_login_url(self, **kwargs): self.__login_url = kwargs["url"]
+
+    def get_login_url(self): return self.__login_url
 
 
 
@@ -113,7 +118,7 @@ class GoogleClass(AttendClass):
             'minute' (int): Class' start minute\n
         """
         super().__init__(**kwargs)
-        self.login_url = "https://accounts.google.com/Login?hl=pt-BR"
+        self.set_login_url(url="https://accounts.google.com/Login?hl=pt-BR")
 
     def execute(self, **kwargs):
         self.driver = WebDriver(executable_path=EXECUTABLE_PATH)
@@ -129,11 +134,11 @@ class GoogleClass(AttendClass):
 
     def doLogin(self):
         start_time = self.get_time()
-        self.driver.get(self.login_url)
+        self.driver.get(self.get_login_url())
 
         #USER
         try:
-            self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
+            self.driver.find_element_by_id("identifierId").send_keys(self.getLogiself.driver.find_element_by_name("password").send_keys(self.getLoginData()["user"]))
             self.driver.find_element_by_id("identifierNext").click()
             try:
                 if self.driver.find_element_by_class_name("o6cuMc"):
@@ -149,7 +154,7 @@ class GoogleClass(AttendClass):
         #PASSWORD
         for _ in range(15):
             try:
-                self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
+                self.driver.find_element_by_name("password").send_keys(self.getLoginData()["passwd"])
                 break
             except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
                 sleep(1)
@@ -201,7 +206,7 @@ class ZoomClass(GoogleClass):
             'minute' (int): Class' start minute\n
         """
         super().__init__(**kwargs)
-        self.login_url = "https://zoom.us/google_oauth_signin"
+        self.set_login_url(url="https://zoom.us/google_oauth_signin")
 
     def execute(self, **kwargs):
         self.driver = WebDriver(executable_path=EXECUTABLE_PATH)

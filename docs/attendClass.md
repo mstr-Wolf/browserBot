@@ -1,4 +1,5 @@
-# AttendClass Basic Usage
+# AttendClass
+## Basic Usage
 ```python
 import sys
 
@@ -25,3 +26,25 @@ elif __name__ == "__main__" and len(sys.argv) != 6:
 
 ```
 
+## Attributes
+### self.length
+- Description: Intended class time
+- Type: float
+- Note: 'self.set_class_length' returns hour, minute and, if necessary, second, from the float value of 'self.length'
+
+### self.MEET_URL
+- Description: Intended class url, given a certain code
+- Type: string
+- Setter: self.set_meeting_code()
+
+### self.loginData
+- Description: User's login and password
+- Type: dictionary
+- Setter: self.setLoginData()
+- Getter: self.getLoginData()
+
+### self.login_url
+- Description: Account's login url
+- Type: string
+- Setter: self.set_login_url()
+- Getter: self.get_login_url()
