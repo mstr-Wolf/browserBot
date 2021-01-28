@@ -2,7 +2,7 @@ from time import sleep
 from sys import exit
 from getpass import getpass
 
-from clockwork import Clockwork
+from browserBot.clockwork import Clockwork
 
 import selenium.common.exceptions
 from selenium.webdriver.firefox.webdriver import WebDriver
