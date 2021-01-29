@@ -30,7 +30,6 @@ pip3 install -r requirements.txt
 ```
 
 ## Docs
-- [Clockwork API Reference](https://github.com/sourcerer2/browserBot/blob/master/docs/clockwork.md)
 - [AttendClass Basic Usage](https://github.com/sourcerer2/browserBot/blob/master/docs/attendClass.md)
 
 ## Contributing & Issue Tracker
