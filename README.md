@@ -34,9 +34,8 @@ pip3 install -r requirements.txt
 - [AttendClass Basic Usage](https://github.com/sourcerer2/browserBot/blob/master/docs/attendClass.md)
 
 ## Contributing & Issue Tracker
+Branch & [Pull Request](https://github.com/sourcerer2/browserBot/pulls)
 - [Issues](https://github.com/mstr-Wolf/browserBot/issues)
-- Branches: master(stable), where approved features, patches and updates from v.0(unstable) are. Please, pull request to branch 'v.0' first.
-> Create a new branch, suggesting features to the next version, is also accepted. 
 
 ## License
 [Apache License 2.0](https://github.com/mstr-Wolf/browserBot/blob/master/LICENSE)
