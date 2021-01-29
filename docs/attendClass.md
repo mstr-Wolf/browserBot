@@ -1,9 +1,14 @@
 # AttendClass
 ## Basic Usage
 ```python
+import sys
+
+from time import sleep
+TIME = 10 #class length in seconds
+
 from browserBot.attendClass import GoogleClass, ZoomClass
 
-hall = GoogleClass("aaabbbbccc")
+hall = GoogleClass(code = "aaabbbbccc")
 #hall = ZoomClass("some zoom meeting code or url here")
 
 hall.set_login_data(user=<user>, passwd=<password>)
@@ -14,6 +19,10 @@ hall.driver = "firefox"
 hall.doLogin()
 
 hall.enter_class()
+
+for _ in range(TIME): sleep(1)
+
+hall.driver.close()
 ```
 
 ## Attributes
@@ -40,29 +49,4 @@ hall.enter_class()
 ```
 - Description: Class' selenium driver (Firefox as standard)
 - Type: WebDriver (class)
-```
-
-## Advanced Usage
-```python
-import sys
-
-from browserBot.attendClass import GoogleClass, ZoomClass
-
-if __name__ == "__main__" and len(sys.argv) == 2:
-    sys.argv[1].lower()
-    if sys.argv[1] == "meet" or sys.argv[1] == "google":
-        try:
-            benThe_Clock = GoogleClass(code=sys.argv[2])
-        except KeyboardInterrupt:
-            sys.exit()
-    elif sys.argv[1] == "zoom":
-        try:
-            benThe_Clock = ZoomClass(code=sys.argv[2])
-        except KeyboardInterrupt:
-            sys.exit()
-
-elif __name__ == "__main__" and len(sys.argv) != 2:
-    print("Execution example:\n\tpython3 main.py [platform] [code] [length] [target hour] [target minute]")
-    print("Platforms:\n\tgoogle (meet)\n\tzoom")
-
 ```
