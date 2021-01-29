@@ -8,11 +8,12 @@ Let your imagination drive you...
 ## Installation
 Get source code
 ```shell script
-git clone https://github.com/sourcerer2/browserBot.git && cd browserBot
+git clone git@github.com:sourcerer2/browserBot.git && cd browserBot
 
-# In case you're having problems with QT_DEVICE_PIXEL_RATIO
+# In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
 ```
+> Don't forget to add --branch to 'git clone' command, and get the latest version
 
 ### Dependancies
 #### Package Installer
@@ -33,9 +34,8 @@ pip3 install -r requirements.txt
 - [AttendClass Basic Usage](https://github.com/sourcerer2/browserBot/blob/master/docs/attendClass.md)
 
 ## Contributing & Issue Tracker
+Branch & [Pull Request](https://github.com/sourcerer2/browserBot/pulls)
 - [Issues](https://github.com/mstr-Wolf/browserBot/issues)
-- Branches: master(stable), where approved features, patches and updates from v.0(unstable) are. Please, pull request to branch 'v.0' first.
-> Create a new branch, suggesting features to the next version, is also accepted. 
 
 ## License
 [Apache License 2.0](https://github.com/mstr-Wolf/browserBot/blob/master/LICENSE)

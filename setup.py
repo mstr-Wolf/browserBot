@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="browsetBot-sourcerer2", # Replace with your own username
-    version="1.3.1",
+    version="1.3.1.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Browser and web automation engine",

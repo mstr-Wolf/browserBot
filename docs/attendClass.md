@@ -1,4 +1,5 @@
-# AttendClass Basic Usage
+# AttendClass
+## Basic Usage
 ```python
 import sys
 
@@ -25,3 +26,48 @@ elif __name__ == "__main__" and len(sys.argv) != 6:
 
 ```
 
+## Attributes
+### self.length
+```
+- Description: Intended time to close driver
+- Type: float
+- Note: 'self.length_parser' returns hour, minute and, if necessary, second, from the float value of 'self.length'
+```
+
+### self.meet_url
+```
+- Description: Intended class url, given a certain code
+- Type: string
+- Setter: self.set_meeting_code()
+```
+
+### self.loginData
+```
+- Description: User's login and password
+- Type: dictionary
+```
+
+### self.driver
+```
+- Description: Class' selenium driver (Firefox as standard)
+- Type: WebDriver (class)
+```
+
+### self.login_url
+```
+- Description: Account's login url
+- Type: string
+```
+
+## Methods
+
+### Flow
+> Note: Method self.run() calls self.set_driver(), self.execute() and self.shutdownConnection().
+
+- For instant execution:
+```
+self.login = [YOUR USER NAME] #self.login = "" for cli input
+self.driver = "firefox"
+self.execute()
+self.shutdownConnection()
+```
