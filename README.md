@@ -13,7 +13,7 @@ git clone git@github.com:sourcerer2/browserBot.git && cd browserBot
 # In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
 ```
-> Don't forget to add --branch to 'git clone' command, and get the latest version. Note: v1.4 branch in development
+> Don't forget to add --branch to 'git clone' command, and get the latest version.
 
 ### Dependancies
 #### Package Installer
