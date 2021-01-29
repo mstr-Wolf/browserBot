@@ -31,7 +31,7 @@ elif __name__ == "__main__" and len(sys.argv) != 6:
 ```
 - Description: Intended time to close driver
 - Type: float
-- Note: 'self.set_class_length' returns hour, minute and, if necessary, second, from the float value of 'self.length'
+- Note: 'self.length_parser' returns hour, minute and, if necessary, second, from the float value of 'self.length'
 ```
 
 ### self.meet_url
@@ -41,28 +41,22 @@ elif __name__ == "__main__" and len(sys.argv) != 6:
 - Setter: self.set_meeting_code()
 ```
 
-### self.__loginData
+### self.loginData
 ```
 - Description: User's login and password
 - Type: dictionary
-- Setter: self.setLoginData()
-- Getter: self.getLoginData()
 ```
 
-### self.__driver
+### self.driver
 ```
 - Description: Class' selenium driver (Firefox as standard)
 - Type: WebDriver (class)
-- Setter: self.set_driver()
-- Getter: self.get_driver()
 ```
 
-### self.__login_url
+### self.login_url
 ```
 - Description: Account's login url
 - Type: string
-- Setter: self.set_login_url()
-- Getter: self.get_login_url()
 ```
 
 ## Methods
@@ -72,7 +66,8 @@ elif __name__ == "__main__" and len(sys.argv) != 6:
 
 - For instant execution:
 ```
-self.set_driver()
+self.login = [YOUR USER NAME] #self.login = "" for cli input
+self.driver = "firefox"
 self.execute()
 self.shutdownConnection()
 ```

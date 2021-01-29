@@ -23,6 +23,9 @@ class AttendClass(Clockwork):
         """
         super().__init__(**kwargs)
         print(__name__, "started!")
+        self.__loginData = None
+        self.__login_url = None
+        self.__driver = None
 
         try:
             self.length = float(kwargs["class_length"])
@@ -30,16 +33,15 @@ class AttendClass(Clockwork):
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
         except (TypeError, ValueError): print("ERROR ****** ********\n'class_length' parameter may be containing an invalid value! Check 'help(AttendClass)' for more details ******")
 
-        self.setLoginData()
-
-    def run(self):
+    def run(self, login=""):
+        self.loginData = login
         print("Process scheduled to", self.get_target().format_datetime(), "\n")
         while True:
             print(self.get_time().format_datetime(), end="\r")
             if self.get_time() >= self.get_target():
                 print("Time reached\nStarting process...")
                 try:
-                    self.set_driver()
+                    self.driver = "firefox"
                     self.execute()
                     self.shutdownConnection()
                     break
@@ -51,17 +53,17 @@ class AttendClass(Clockwork):
 
 
     def shutdownConnection(self, **kwargs):
-        try: self.get_driver.current_url
+        try: self.driver.current_url
         except selenium.common.exceptions.InvalidSessionIdException:
             self.close_drive()
 
-        shutTime = self.set_class_length()
+        shutTime = self.length_parser()
         if len(shutTime) == 3:
             self.delay_target(hour = shutTime[0], minute = shutTime[1], second = shutTime[2])
         elif len(shutTime) == 2:
             self.delay_target(hour = shutTime[0], minute = shutTime[1])
         else:
-            print("ERROR ****** Length may not be defined. Check AttendClass.length and AttendClass.set_class_length for more information!")
+            print("ERROR ****** Length may not be defined. Check AttendClass.length and AttendClass.length_parser for more information!")
             self.close_drive()
             return
 
@@ -76,16 +78,14 @@ class AttendClass(Clockwork):
     def execute(self, **kwargs): raise NotImplementedError
 
     def close_drive(self, **kwargs):
-        try: self.get_driver.close()
+        try: self.driver.close()
         except (AttributeError, selenium.common.exceptions.InvalidSessionIdException):
             print("ERROR ****** Browser driver not implemented or it's already closed! ******")
             exit()
 
     def doLogin(self): raise NotImplementedError
 
-
-
-    def set_class_length(self, **kwargs):
+    def length_parser(self, **kwargs):
         minutes = self.length%60
         if minutes < 0:
             seconds = minutes * 60
@@ -96,22 +96,33 @@ class AttendClass(Clockwork):
             hours = int((self.length-minutes)/60)
             return hours, minutes
 
-    def setLoginData(self):
-        user = str(input("User: "))
+    def set_meeting_code(self, **kwargs): raise NotImplementedError
+
+
+    @property
+    def loginData(self): return self.__loginData
+
+    @loginData.setter
+    def loginData(self, user):
+        if user == "": user = str(input("User: "))
+        else: pass
+
         passwd = getpass("Password: ")
         self.__loginData = {"user": user, "passwd": passwd}
 
-    def getLoginData(self):
-        return self.__loginData
+    @property
+    def login_url(self): return self.__login_url
 
-    def set_meeting_code(self, **kwargs): raise NotImplementedError
+    @login_url.setter
+    def login_url(self, url): self.__login_url = url
 
-    def set_login_url(self, **kwargs): self.__login_url = kwargs["url"]
 
-    def get_login_url(self): return self.__login_url
+    @property
+    def driver(self): return self.__driver
 
-    def set_driver(self, **kwargs):
-        if kwargs["browser"] == "firefox": self.__driver = WebDriver(executable_path=EXECUTABLE_PATH)
+    @driver.setter
+    def driver(self, browser):
+        if browser == "firefox": self.__driver = WebDriver(executable_path=EXECUTABLE_PATH)
         else: self.__driver = None
 
-    def get_driver(self): return self.__driver
+    

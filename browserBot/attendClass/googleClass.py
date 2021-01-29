@@ -13,12 +13,12 @@ class GoogleClass(AttendClass):
             'minute' (int): Class' start minute\n
         """
         super().__init__(**kwargs)
-        self.set_login_url(url="https://accounts.google.com/Login?hl=pt-BR")
+        self.login_url = "https://accounts.google.com/Login?hl=pt-BR"
 
     def execute(self, **kwargs):
         self.doLogin()
 
-        try: self.get_driver.get(self.meet_url)
+        try: self.driver.get(self.meet_url)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             self.close_drive()
@@ -28,14 +28,14 @@ class GoogleClass(AttendClass):
 
     def doLogin(self):
         start_time = self.get_time()
-        self.get_driver.get(self.get_login_url())
+        self.driver.get(self.login_url)
 
         #USER
         try:
-            self.get_driver.find_element_by_id("identifierId").send_keys(self.getLogiself.get_driver.find_element_by_name("password").send_keys(self.getLoginData()["user"]))
-            self.get_driver.find_element_by_id("identifierNext").click()
+            self.driver.find_element_by_id("identifierId").send_keys(self.loginData["user"])
+            self.driver.find_element_by_id("identifierNext").click()
             try:
-                if self.get_driver.find_element_by_class_name("o6cuMc"):
+                if self.driver.find_element_by_class_name("o6cuMc"):
                     print("ERROR ****** Login failed. Check user and try again! ******")
                     self.close_drive()
                     return
@@ -48,14 +48,14 @@ class GoogleClass(AttendClass):
         #PASSWORD
         for _ in range(15):
             try:
-                self.get_driver.find_element_by_name("password").send_keys(self.getLoginData()["passwd"])
+                self.driver.find_element_by_name("password").send_keys(self.loginData["passwd"])
                 break
             except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
                 sleep(1)
         try:
-            self.get_driver.find_element_by_id("passwordNext").click()
+            self.driver.find_element_by_id("passwordNext").click()
             try:
-                if self.get_driver.find_element_by_class_name("EjBTad"):
+                if self.driver.find_element_by_class_name("EjBTad"):
                     print("ERROR ****** Login failed. Check your password and try again! ******")
                     self.close_drive()
                     return

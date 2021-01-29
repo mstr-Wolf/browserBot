@@ -12,21 +12,21 @@ class ZoomClass(GoogleClass):
             'minute' (int): Class' start minute\n
         """
         super().__init__(**kwargs)
-        self.set_login_url(url="https://zoom.us/google_oauth_signin")
+        self.login_url = "https://zoom.us/google_oauth_signin"
 
     def execute(self, **kwargs):
         self.doLogin()
 
         try:
-            self.get_driver.get(self.meet_url)
-            self.get_driver.find_elements_by_tag_name("a")[4].click()
+            self.driver.get(self.meet_url)
+            self.driver.find_elements_by_tag_name("a")[4].click()
         except (selenium.common.exceptions.InvalidArgumentException, selenium.common.exceptions.NoSuchElementException):
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             self.close_drive()
             return
         except selenium.common.exceptions.InvalidSessionIdException:
             return
-        self.get_driver.find_element_by_id("joinBtn").click()
+        self.driver.find_element_by_id("joinBtn").click()
         return
 
     def set_meeting_code(self, **kwargs):
