@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="bBot-sourcerer2", # Replace with your own username
+    name="beeBot-sourcerer2", # Replace with your own username
     version="1.4.0.2",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
