@@ -1,7 +1,7 @@
 # browserBot
 Attending online classes? Scraping website data? Building bots? 
 
-'browserBot' is an easy way to automate web through your browser. 
+'browserBot' is an easy way to automate. 
 
 Let your imagination drive you...
 
