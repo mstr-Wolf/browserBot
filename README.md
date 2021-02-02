@@ -1,14 +1,14 @@
-# browserBot
+# beeBot
 Attending online classes? Scraping website data? Building bots? 
 
-'browserBot' is an easy way to automate web through your browser. 
+'beeBot' is an easy way path to automation. 
 
 Let your imagination drive you...
 
 ## Installation
 Get source code
 ```shell script
-git clone git@github.com:sourcerer2/browserBot.git && cd browserBot
+git clone git@github.com:sourcerer2/beeBot.git && cd beeBot
 
 # In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
@@ -30,11 +30,11 @@ pip3 install -r requirements.txt
 ```
 
 ## Docs
-- [AttendClass Basic Usage](https://github.com/sourcerer2/browserBot/blob/master/docs/attendClass.md)
+- [AttendClass Basic Usage](https://github.com/sourcerer2/beeBot/blob/master/docs/attendClass.md)
 
 ## Contributing & Issue Tracker
-Branch & [Pull Request](https://github.com/sourcerer2/browserBot/pulls)
-- [Issues](https://github.com/mstr-Wolf/browserBot/issues)
+Branch & [Pull Request](https://github.com/sourcerer2/beeBot/pulls)
+- [Issues](https://github.com/sourcerer0/beeBot/issues)
 
 ## License
-[Apache License 2.0](https://github.com/mstr-Wolf/browserBot/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/sourcerer0/beeBot/blob/master/LICENSE)

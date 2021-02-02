@@ -4,11 +4,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="bBot-sourcerer2", # Replace with your own username
-    version="1.4.0.1",
+    name="beeBot-sourcerer2", # Replace with your own username
+    version="1.4.0.2",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
-    description="Web & System automation engine",
+    description="Collection of Web & System automation tools",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer2/browserBot",
