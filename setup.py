@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="beeBot-sourcerer2", # Replace with your own username
-    version="1.4.0.2",
+    version="1.4.0.2.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Collection of Web & System automation tools",
