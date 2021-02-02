@@ -1,6 +1,7 @@
 from time import sleep
 from sys import exit
 from getpass import getpass
+from abc import ABC, abstractmethod
 
 import selenium.common.exceptions
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -10,7 +11,7 @@ EXECUTABLE_PATH = os.environ["HOME"] + "/geckodriver"
 
 
 
-class AttendClass():
+class AttendClass(ABC):
     def __init__(self, **kwargs):
         """
         Parameters:\n
@@ -24,10 +25,13 @@ class AttendClass():
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
 
 
+    @abstractmethod
     def doLogin(self): raise NotImplementedError
 
+    @abstractmethod
     def enter_class(self): raise NotImplementedError
 
+    @abstractmethod
     def set_meeting_code(self, **kwargs): raise NotImplementedError
 
     def set_login_data(self, **kwargs):
