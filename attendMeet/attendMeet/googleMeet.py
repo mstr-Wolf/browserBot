@@ -1,9 +1,9 @@
 from time import sleep
 import selenium.common.exceptions
 
-from .attendClass import AttendClass
+from .attendMeet import AttendMeet
 
-class GoogleClass(AttendClass):
+class GoogleMeet(AttendMeet):
     def __init__(self, **kwargs):
         """
         Parameters:\n

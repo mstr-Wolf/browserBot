@@ -11,7 +11,7 @@ EXECUTABLE_PATH = os.environ["HOME"] + "/geckodriver"
 
 
 
-class AttendClass(ABC):
+class AttendMeet(ABC):
     def __init__(self, **kwargs):
         """
         Parameters:\n
@@ -22,7 +22,7 @@ class AttendClass(ABC):
         self.__driver = None
 
         try: self.set_meeting_code(meeting_code = kwargs["code"])
-        except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendClass)' for more details ******")
+        except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendMeet)' for more details ******")
 
 
     @abstractmethod
