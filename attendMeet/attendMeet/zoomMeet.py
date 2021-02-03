@@ -1,8 +1,8 @@
 import selenium.common.exceptions
 
-from .googleClass import GoogleClass
+from .googleMeet import GoogleMeet
 
-class ZoomClass(GoogleClass):
+class ZoomMeet(GoogleMeet):
     def __init__(self, **kwargs):
         """
         Parameters:\n

@@ -1,14 +1,10 @@
-# beeBot
-Attending online classes? Scraping website data? Building bots? 
-
-'beeBot' is an easy way path to automation. 
-
-Let your imagination drive you...
+# Meet
+Automate online meetings and classes with Meet library.
 
 ## Installation
 Get source code
 ```shell script
-git clone git@github.com:sourcerer0/beeBot.git && cd beeBot
+git clone git@github.com:sourcerer0/meet.git && cd meet
 
 # In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
@@ -22,7 +18,7 @@ pip3 install -r requirements.txt
 ```
 
 #### Browser
-*NOTE: attendClass module uses Firefox as its standard browser*
+*NOTE: attendMeet module uses Firefox as its standard browser*
 
 ##### Geckodriver Install (Linux)
 ```shell script
@@ -30,11 +26,11 @@ pip3 install -r requirements.txt
 ```
 
 ## Docs
-- [AttendClass Basic Usage](https://github.com/sourcerer0/beeBot/blob/master/docs/attendClass.md)
+- [AttendMeet Basic Usage](https://github.com/sourcerer0/meet/blob/master/docs/attendMeet.md)
 
 ## Contributing & Issue Tracker
-Branch & [Pull Request](https://github.com/sourcerer0/beeBot/pulls)
-- [Issues](https://github.com/sourcerer0/beeBot/issues)
+Branch & [Pull Request](https://github.com/sourcerer0/meet/pulls)
+- [Issues](https://github.com/sourcerer0/meet/issues)
 
 ## License
-[Apache License 2.0](https://github.com/sourcerer0/beeBot/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/sourcerer0/meet/blob/master/LICENSE)

@@ -1,4 +1,4 @@
-# AttendClass
+# AttendMeet
 ## Basic Usage
 ```python
 import sys
@@ -6,10 +6,10 @@ import sys
 from time import sleep
 TIME = 10 #class length in seconds
 
-from browserBot.attendClass import GoogleClass, ZoomClass
+from meet.attendMeet import GoogleMeet, ZoomMeet
 
-hall = GoogleClass(code = "aaabbbbccc")
-#hall = ZoomClass("some zoom meeting code or url here")
+hall = GoogleMeet(code = "aaabbbbccc")
+#hall = ZoomMeet("some zoom meeting code or url here")
 
 hall.set_login_data(user=<user>, passwd=<password>)
 # No parameters for CLI input

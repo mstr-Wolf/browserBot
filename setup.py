@@ -4,14 +4,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="beeBot-sourcerer2", # Replace with your own username
-    version="1.4.0.2.2",
+    name="attendMeet-sourcerer0", # Replace with your own username
+    version="1.4.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
-    description="Collection of Web & System automation tools",
+    description="Online meeting automation tool",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/sourcerer2/browserBot",
+    url="https://github.com/sourcerer0/attendMeet",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
