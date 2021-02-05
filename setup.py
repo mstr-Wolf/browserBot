@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="meet-sourcerer0", # Replace with your own username
-    version="1.4.1.2",
+    version="1.4.1.3",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Online meeting automation tool",
@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer0/meet",
     packages=setuptools.find_packages(),
+    keywords="bot firefox automation browser selenium meeting zoom google",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache License 2.0",
