@@ -1,0 +1,10 @@
+README.md
+setup.py
+attendMeet/__init__.py
+attendMeet/attendMeet.py
+attendMeet/googleMeet.py
+attendMeet/zoomMeet.py
+meet_sourcerer0.egg-info/PKG-INFO
+meet_sourcerer0.egg-info/SOURCES.txt
+meet_sourcerer0.egg-info/dependency_links.txt
+meet_sourcerer0.egg-info/top_level.txt

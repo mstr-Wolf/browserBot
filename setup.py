@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer0/meet",
     packages=setuptools.find_packages(),
+    keywords="bot firefox automation browser selenium meeting zoom google"
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache License 2.0",
