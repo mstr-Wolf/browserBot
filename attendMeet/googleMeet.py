@@ -60,21 +60,17 @@ class GoogleMeet(AttendMeet):
                 return
 
     def set_meeting_code(self, **kwargs):
-        try:
-            kwargs["meeting_code"] + "STRING_TEST"
+        code_len = len(kwargs["meeting_code"])
 
-            code_len = len(kwargs["meeting_code"])
-            if (code_len == 12 and kwargs["meeting_code"][3] == "-" and kwargs["meeting_code"][8] == "-") or code_len == 10:
-                for crc in kwargs["meeting_code"]:
-                    try:
-                        int(crc)
-                        print("ERROR ****** Meeting code must not contain numbers! ******")
-                        self.meet_url =  ""
-                        return
-                    except ValueError: continue
-                self.meet_url="https://meet.google.com/%s" % kwargs["meeting_code"]
-            else: raise TypeError
-        except TypeError:
+        if type(kwargs["meeting_code"]) != type(0) and ((code_len == 12 and kwargs["meeting_code"][3] == "-" and kwargs["meeting_code"][8] == "-") or code_len == 10):
+            for crc in kwargs["meeting_code"]:
+                if type(crc) == type(0):
+                    print("ERROR ****** Meeting code must not contain numbers! ******")
+                    self.meet_url =  ""
+                    return
+                else:
+                    self.meet_url="https://meet.google.com/%s" % kwargs["meeting_code"]
+        else:
             print("ERROR ****** Meeting code not accepted! Please check again ******")
             self.meet_url =  ""
-            return
+            return    
