@@ -6,6 +6,8 @@ Get source code
 ```shell script
 git clone git@github.com:sourcerer0/meet.git && cd meet
 
+python3 -m setup install
+
 # In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
 ```
