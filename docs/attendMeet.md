@@ -11,7 +11,7 @@ from attendMeet import GoogleMeet, ZoomMeet
 hall = GoogleMeet(code = "aaabbbbccc")
 #hall = ZoomMeet("some zoom meeting code or url here")
 
-hall.set_login_data(user=<user>, passwd=<password>)
+hall.set_login_data(user="<user>", passwd="<password>")
 # No parameters for CLI input
 
 hall.driver = "firefox"
