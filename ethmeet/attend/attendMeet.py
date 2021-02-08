@@ -1,5 +1,3 @@
-from time import sleep
-from sys import exit
 from getpass import getpass
 from abc import ABC, abstractmethod
 
@@ -23,7 +21,7 @@ class AttendMeet(ABC):
         self.meet_url = None
 
         try: self.set_meeting_url(kwargs["code"])
-        except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendMeet)' for more details ******")
+        except KeyError: pass
 
 
     @abstractmethod

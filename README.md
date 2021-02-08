@@ -1,10 +1,10 @@
-# Meet
-Automate online meetings and classes with Meet library.
+# ethmeet
+Automate online meetings and classes with ethmeet library.
 
 ## Installation
 From source:
 ```shell script
-git clone git@github.com:sourcerer0/meet.git && cd meet
+git clone git@github.com:sourcerer0/ethmeet.git && cd ethmeet
 
 python3 -m setup install
 
@@ -14,7 +14,7 @@ python3 -m setup install
 
 Pip:
 ```shell script
-python3 -m pip install meet-sourcerer0
+python3 -m pip install ethmeet
 ```
 
 ### Dependancies
@@ -32,11 +32,11 @@ pip3 install -r requirements.txt
 ```
 
 ## Docs
-- [AttendMeet Basic Usage](https://github.com/sourcerer0/meet/blob/master/docs/attendMeet.md)
+- [AttendMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/attendMeet.md)
 
 ## Contributing & Issue Tracker
-Branch & [Pull Request](https://github.com/sourcerer0/meet/pulls)
-- [Issues](https://github.com/sourcerer0/meet/issues)
+Branch & [Pull Request](https://github.com/sourcerer0/ethmeet/pulls)
+- [Issues](https://github.com/sourcerer0/ethmeet/issues)
 
 ## License
-[Apache License 2.0](https://github.com/sourcerer0/meet/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/sourcerer0/ethmeet/blob/master/LICENSE)
