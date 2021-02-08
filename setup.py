@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="meet-sourcerer0",
+    name="meet",
     version="1.4.1.3.2",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
