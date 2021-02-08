@@ -6,7 +6,7 @@ import sys
 from time import sleep
 TIME = 10 #class length in seconds
 
-from meetup import GoogleMeet, ZoomMeet
+from ethmeet import GoogleMeet, ZoomMeet
 
 hall = GoogleMeet(code = "aaabbbbccc")
 #hall = ZoomMeet("some zoom meeting code or url here")

@@ -1,10 +1,10 @@
-# Meetup
-Automate online meetings and classes with Meetup library.
+# ethmeet
+Automate online meetings and classes with ethmeet library.
 
 ## Installation
 From source:
 ```shell script
-git clone git@github.com:sourcerer0/meetup.git && cd meetup
+git clone git@github.com:sourcerer0/ethmeet.git && cd ethmeet
 
 python3 -m setup install
 
@@ -14,7 +14,7 @@ python3 -m setup install
 
 Pip:
 ```shell script
-python3 -m pip install meetup
+python3 -m pip install ethmeet
 ```
 
 ### Dependancies
@@ -32,11 +32,11 @@ pip3 install -r requirements.txt
 ```
 
 ## Docs
-- [AttendMeet Basic Usage](https://github.com/sourcerer0/meetup/blob/master/docs/attendMeet.md)
+- [AttendMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/attendMeet.md)
 
 ## Contributing & Issue Tracker
-Branch & [Pull Request](https://github.com/sourcerer0/meetup/pulls)
-- [Issues](https://github.com/sourcerer0/meetup/issues)
+Branch & [Pull Request](https://github.com/sourcerer0/ethmeet/pulls)
+- [Issues](https://github.com/sourcerer0/ethmeet/issues)
 
 ## License
-[Apache License 2.0](https://github.com/sourcerer0/meetup/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/sourcerer0/ethmeet/blob/master/LICENSE)

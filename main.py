@@ -1,4 +1,4 @@
-from meetup import GoogleMeet
+from ethmeet import GoogleMeet
 
 hal = GoogleMeet()
 
