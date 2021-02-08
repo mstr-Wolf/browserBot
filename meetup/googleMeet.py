@@ -1,9 +1,10 @@
 from time import sleep
 import selenium.common.exceptions
 
-from .attendMeet import AttendMeet
+from .attend import AttendMeet
+from .create import CreateMeet
 
-class GoogleMeet(AttendMeet):
+class GoogleMeet(AttendMeet, CreateMeet):
     def __init__(self, **kwargs):
         """
         Parameters:\n
@@ -16,13 +17,33 @@ class GoogleMeet(AttendMeet):
         try: self.driver.get(self.meet_url)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
-            self.driver.close()
         except selenium.common.exceptions.InvalidSessionIdException:
             return
 
-        element = self.driver.find_element_by_class_name("uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt.M9Bg4d")
-        element.click()
+        for _ in range(15):
+            try:
+                self.driver.find_element_by_class_name("uArJ5e UQuaGc Y5sE8d uyXBBb xKiqt M9Bg4d".replace(" ", ".")).click()
+                break
+            except selenium.common.exceptions.NoSuchElementException:
+                sleep(1)
+                continue
+
         return
+
+    def new_class(self):
+        self.driver.get("https://meet.google.com/")
+        button = self.driver.find_element_by_class_name("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe cjtUbb Dg7t5c".replace(" ", "."))
+        button.click()
+        button = self.driver.find_element_by_class_name("VfPpkd-rymPhb-ibnC6b VfPpkd-rOvkhd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe".replace(" ", "."))
+        button.click()
+
+        for _ in range(5):
+            try:
+                self.set_new_class(self.driver.find_element_by_class_name("Hayy8b").text)
+                break
+            except (selenium.common.exceptions.NoSuchElementException): sleep(1)
+
+        self.driver.get("https://meet.google.com/")
 
     def doLogin(self):
         self.driver.get(self.login_url)
@@ -34,12 +55,10 @@ class GoogleMeet(AttendMeet):
             try:
                 if self.driver.find_element_by_class_name("o6cuMc"):
                     print("ERROR ****** Login failed. Check user and try again! ******")
-                    self.driver.close()
                     return
             except selenium.common.exceptions.NoSuchElementException: pass
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
             print("ERROR ****** Login failed. Check your connection and try again! ******")
-            self.driver.close()
             return
             
         #PASSWORD
@@ -54,29 +73,28 @@ class GoogleMeet(AttendMeet):
             try:
                 if self.driver.find_element_by_class_name("EjBTad"):
                     print("ERROR ****** Login failed. Check your password and try again! ******")
-                    self.driver.close()
                     return
             except selenium.common.exceptions.NoSuchElementException: pass
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
                 print("ERROR ****** Login failed. Check your connection and try again! ******")
-                self.driver.close()
                 return
 
     def set_meeting_url(self, code):
         code_len = len(code)
         mCode = ""
 
-        if type(code) != type(0) and ((code_len == 12 and code[3] == "-" and code[8] == "-") or code_len == 10):
-            for crc in code:
-                if type(crc) == type(0):
-                    print("ERROR ****** Meeting code must not contain numbers! ******")
-                else:
-                    mCode = code
-        else:
-            print("ERROR ****** Meeting code not accepted! Please check again ******")
-
         if "https://meet.google.com/" in code:
             self.meet_url = code
+        elif "meet.google.com/" in code:
+            self.meet_url= "{0}{1}".format("https://", code)
         else:
+            if type(code) != type(0) and ((code_len == 12 and code[3] == "-" and code[8] == "-") or code_len == 10):
+                for crc in code:
+                    if type(crc) == type(0):
+                        print("ERROR ****** Meeting code must not contain numbers! ******")
+                    else:
+                        mCode = code
+            else: print("ERROR ****** Meeting code not accepted! Please check again ******")
+
             self.meet_url="https://meet.google.com/%s" % mCode
         return
