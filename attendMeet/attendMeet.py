@@ -22,7 +22,7 @@ class AttendMeet(ABC):
         self.__driver = None
         self.__meet_url = None
 
-        try: self.login_url = kwargs["code"]
+        try: self.set_meeting_url(kwargs["code"])
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendMeet)' for more details ******")
 
 
@@ -32,6 +32,12 @@ class AttendMeet(ABC):
     @abstractmethod
     def enter_class(self): raise NotImplementedError
 
+    @abstractmethod
+    def set_meeting_url(self): raise NotImplementedError
+
+
+    @property
+    def meet_url(self): return self.__meet_url
 
     @property
     def login_data(self): return self.__login_data
@@ -57,14 +63,6 @@ class AttendMeet(ABC):
         }
         try: self.__login_url = plat_login[platform]
         except KeyError: print("ERROR ****** ******** Platform not available! ******")
-
-    @property
-    def meet_url(self):
-        return self.__meet_url
-
-    @meet_url.setter
-    def meet_url(self, code):
-        raise NotImplementedError
 
     @property
     def driver(self): return self.__driver

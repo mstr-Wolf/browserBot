@@ -34,13 +34,7 @@ hall.driver.close()
 Setter:
 ```python
 #defined at __init__(), by kwargs['code'] parameter (don't need to worry)
-self.meet_url = "<platform>"
-
-"""
-Platforms:
-    - google / meet
-    - zoom
-"""
+self.set_meeting_url("code or url")
 ```
 
 ### self.login_url
@@ -50,7 +44,13 @@ Platforms:
 Setter:
 ```python
 #defined by child class at __init__() (don't need to worry)
-self.login_url = "<platform's login>"
+self.login_url = "<platform>"
+
+"""
+Platforms:
+    - google / meet
+    - zoom
+"""
 ```
 
 ### self.login_data

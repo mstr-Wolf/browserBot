@@ -62,8 +62,7 @@ class GoogleMeet(AttendMeet):
                 self.driver.close()
                 return
 
-    @meet_url.setter
-    def meet_url(self, code):
+    def set_meeting_url(self, code):
         code_len = len(code)
         mCode = ""
 

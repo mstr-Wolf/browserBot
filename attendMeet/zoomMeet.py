@@ -24,8 +24,7 @@ class ZoomMeet(GoogleMeet):
         self.driver.find_element_by_id("joinBtn").click()
         return
 
-    @meet_url.setter
-    def meet_url(self, code):
+    def set_meeting_url(self, code):
         if "https://zoom.us/j/" in code:
             self.meet_url = code
         else: self.meet_url="https://zoom.us/j/%s" % code
