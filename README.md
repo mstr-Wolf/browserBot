@@ -2,7 +2,7 @@
 Automate online meetings and classes with Meet library.
 
 ## Installation
-Get source code
+From source:
 ```shell script
 git clone git@github.com:sourcerer0/meet.git && cd meet
 
@@ -11,7 +11,11 @@ python3 -m setup install
 # In case you're having trouble with QT_DEVICE_PIXEL_RATIO
 ./QT_DEVICE.sh
 ```
-> Don't forget to add --branch to 'git clone' command, and get the latest version.
+
+Pip:
+```shell script
+python3 -m pip install meet
+```
 
 ### Dependancies
 #### Package Installer
