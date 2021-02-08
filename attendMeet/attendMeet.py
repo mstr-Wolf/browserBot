@@ -20,7 +20,7 @@ class AttendMeet(ABC):
         self.__login_data = {}
         self.__login_url = None
         self.__driver = None
-        self.__meet_url = None
+        self.meet_url = None
 
         try: self.set_meeting_url(kwargs["code"])
         except KeyError: print("ERROR ****** ********\nSome parameters may be missing! Check 'help(AttendMeet)' for more details ******")
@@ -35,9 +35,6 @@ class AttendMeet(ABC):
     @abstractmethod
     def set_meeting_url(self): raise NotImplementedError
 
-
-    @property
-    def meet_url(self): return self.__meet_url
 
     @property
     def login_data(self): return self.__login_data
