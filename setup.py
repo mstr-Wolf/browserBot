@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="meet-sourcerer0",
-    version="1.4.2",
+    version="1.4.2.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Online meeting automation tool",
