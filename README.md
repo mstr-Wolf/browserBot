@@ -14,7 +14,7 @@ python3 -m setup install
 
 Pip:
 ```shell script
-python3 -m pip install meet
+python3 -m pip install meet-sourcerer0
 ```
 
 ### Dependancies
