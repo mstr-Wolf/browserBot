@@ -7,7 +7,7 @@ class GoogleMeet(AttendMeet):
     def __init__(self, **kwargs):
         """
         Parameters:\n
-            'code' (string): Meeting code\n
+            kwargs['code'] (string): Meeting code\n
         """
         super().__init__(**kwargs)
         self.login_url = "google"
@@ -19,6 +19,9 @@ class GoogleMeet(AttendMeet):
             self.driver.close()
         except selenium.common.exceptions.InvalidSessionIdException:
             return
+
+        element = self.driver.find_element_by_class_name("uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt.M9Bg4d")
+        element.click()
         return
 
     def doLogin(self):
@@ -59,18 +62,22 @@ class GoogleMeet(AttendMeet):
                 self.driver.close()
                 return
 
-    def set_meeting_code(self, **kwargs):
-        code_len = len(kwargs["meeting_code"])
+    @meet_url.setter
+    def meet_url(self, code):
+        code_len = len(code)
+        mCode = ""
 
-        if type(kwargs["meeting_code"]) != type(0) and ((code_len == 12 and kwargs["meeting_code"][3] == "-" and kwargs["meeting_code"][8] == "-") or code_len == 10):
-            for crc in kwargs["meeting_code"]:
+        if type(code) != type(0) and ((code_len == 12 and code[3] == "-" and code[8] == "-") or code_len == 10):
+            for crc in code:
                 if type(crc) == type(0):
                     print("ERROR ****** Meeting code must not contain numbers! ******")
-                    self.meet_url =  ""
-                    return
                 else:
-                    self.meet_url="https://meet.google.com/%s" % kwargs["meeting_code"]
+                    mCode = code
         else:
             print("ERROR ****** Meeting code not accepted! Please check again ******")
-            self.meet_url =  ""
-            return    
+
+        if "https://meet.google.com/" in code:
+            self.meet_url = code
+        else:
+            self.meet_url="https://meet.google.com/%s" % mCode
+        return
