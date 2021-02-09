@@ -1,7 +1,6 @@
 from getpass import getpass
 from abc import ABC, abstractmethod
 
-import selenium.common.exceptions
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 import os
