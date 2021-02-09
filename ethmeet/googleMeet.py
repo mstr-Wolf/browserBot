@@ -4,7 +4,7 @@ import selenium.common.exceptions
 from .attend import AttendMeet
 from .create import CreateMeet
 
-class GoogleMeet(AttendMeet, CreateMeet):
+class GoogleMeet(AttendMeet):
     def __init__(self, **kwargs):
         """
         Parameters:\n
@@ -20,7 +20,7 @@ class GoogleMeet(AttendMeet, CreateMeet):
         except selenium.common.exceptions.InvalidSessionIdException:
             return
 
-        for _ in range(15):
+        for _ in range(25):
             try:
                 self.driver.find_element_by_class_name("uArJ5e UQuaGc Y5sE8d uyXBBb xKiqt M9Bg4d".replace(" ", ".")).click()
                 break
@@ -29,21 +29,6 @@ class GoogleMeet(AttendMeet, CreateMeet):
                 continue
 
         return
-
-    def new_class(self):
-        self.driver.get("https://meet.google.com/")
-        button = self.driver.find_element_by_class_name("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe cjtUbb Dg7t5c".replace(" ", "."))
-        button.click()
-        button = self.driver.find_element_by_class_name("VfPpkd-rymPhb-ibnC6b VfPpkd-rOvkhd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe".replace(" ", "."))
-        button.click()
-
-        for _ in range(5):
-            try:
-                self.set_new_class(self.driver.find_element_by_class_name("Hayy8b").text)
-                break
-            except (selenium.common.exceptions.NoSuchElementException): sleep(1)
-
-        self.driver.get("https://meet.google.com/")
 
     def doLogin(self):
         self.driver.get(self.login_url)

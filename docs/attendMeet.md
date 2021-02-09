@@ -33,7 +33,7 @@ hall.driver.close()
 
 Setter:
 ```python
-#defined at __init__(), by kwargs['code'] parameter (don't need to worry)
+#defined at __init__(), by kwargs['code'] parameter
 self.set_meeting_url("code or url")
 ```
 
@@ -77,4 +77,24 @@ self.driver = "<platform>"
 Platforms:
     - firefox
 """
+```
+
+
+## Integrating with CreateMeet class
+[CreateMeet Documentation](https://github.com/sourcerer0/ethmeet/blob/master/docs/createMeet.md)
+```python
+from ethmeet import GoogleMeet
+from ethmeet.create import CreateGoogle
+
+hal = GoogleMeet()
+
+hal.login_data = {"user": "<your username>", "passwd": "<your password>"}
+hal.driver = "firefox"
+hal.doLogin()
+
+c3po = CreateGoogle(driver = hal.driver)
+c3po.new_class()
+
+hal.set_meeting_url(c3po.code)
+hal.enter_class()
 ```
