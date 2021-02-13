@@ -23,5 +23,9 @@ setuptools.setup(
     scripts=[
         'scripts/gecko_install',
         'scripts/QT_DEVICE',
+    ],
+    install_requires=[
+        'selenium>=3.141.0',
+        'urllib3>=1.26.3'
     ]
 )
