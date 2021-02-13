@@ -27,7 +27,7 @@ class AttendMeet(ABC):
     def doLogin(self): raise NotImplementedError
 
     @abstractmethod
-    def enter_class(self): raise NotImplementedError
+    def goto_meet(self): raise NotImplementedError
 
     @abstractmethod
     def set_meeting_url(self): raise NotImplementedError

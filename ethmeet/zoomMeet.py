@@ -11,7 +11,7 @@ class ZoomMeet(GoogleMeet):
         super().__init__(**kwargs)
         self.login_url = "zoom"
 
-    def enter_class(self):
+    def enter_meet(self):
         try:
             self.driver.get(self.meet_url)
             self.driver.find_elements_by_tag_name("a")[4].click()
