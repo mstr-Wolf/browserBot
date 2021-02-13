@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ethmeet",
-    version="1.5.2",
+    version="1.5.3-b.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Online meeting automation tool",
@@ -20,4 +20,8 @@ setuptools.setup(
         "Operating System :: POSIX :: Linux",
     ],
     python_requires='>=3.6',
+    scripts=[
+        'scripts/gecko_install',
+        'scripts/QT_DEVICE',
+    ]
 )
