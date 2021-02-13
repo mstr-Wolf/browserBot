@@ -9,10 +9,10 @@ class CreateMeet(ABC):
         self.__driver = driver
 
     @abstractmethod
-    def new_class(self):
+    def new_meet(self):
         return
 
-    def set_new_class(self, code):
+    def set_new_meet(self, code):
         self.__code = code
 
     @property
@@ -30,7 +30,7 @@ class CreateGoogle(CreateMeet):
     def __init__(self, driver = None, **kwargs):
         super().__init__(driver, **kwargs)
 
-    def new_class(self):
+    def new_meet(self):
         self.driver.get("https://meet.google.com/")
         button = self.driver.find_element_by_class_name("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe cjtUbb Dg7t5c".replace(" ", "."))
         button.click()
@@ -39,7 +39,7 @@ class CreateGoogle(CreateMeet):
 
         for _ in range(5):
             try:
-                self.set_new_class(self.driver.find_element_by_class_name("Hayy8b").text)
+                self.set_new_meet(self.driver.find_element_by_class_name("Hayy8b").text)
                 break
             except (selenium.common.exceptions.NoSuchElementException): sleep(1)
 

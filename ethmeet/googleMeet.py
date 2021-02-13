@@ -12,7 +12,7 @@ class GoogleMeet(AttendMeet):
         super().__init__(**kwargs)
         self.login_url = "google"
 
-    def enter_class(self):
+    def goto_meet(self):
         try: self.driver.get(self.meet_url)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
