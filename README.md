@@ -31,7 +31,7 @@ hall.driver = "firefox"
 
 hall.doLogin()
 
-hall.enter_class()
+hall.goto_meet()
 
 for _ in range(TIME): sleep(1)
 
