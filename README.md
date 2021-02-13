@@ -1,5 +1,5 @@
 # ethmeet
-Automate online meetings and classes with ethmeet library.
+Automate online meetings with ethmeet library.
 
 ## Installation
 From source:
@@ -7,32 +7,18 @@ From source:
 git clone git@github.com:sourcerer0/ethmeet.git && cd ethmeet
 
 python3 -m setup install
-
-# In case you're having trouble with QT_DEVICE_PIXEL_RATIO
-./QT_DEVICE.sh
 ```
 
 Pip:
 ```shell script
-python3 -m pip install ethmeet
+pip3 install ethmeet
 ```
-
-### Dependancies
-#### Package Installer
-```shell script
-pip3 install -r requirements.txt
-```
-
-#### Browser
-*NOTE: attendMeet module uses Firefox as its standard browser*
-
-##### Geckodriver Install (Linux)
-```shell script
-./gecko-install
-```
+> NOTE: ethmeet module uses Firefox as its standard browser
 
 ## Docs
 - [AttendMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/attendMeet.md)
+- [CreateMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/createMeet.md)
+
 
 ## Contributing & Issue Tracker
 Branch & [Pull Request](https://github.com/sourcerer0/ethmeet/pulls)
