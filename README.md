@@ -1,42 +1,53 @@
 # ethmeet
-Automate online meetings and classes with ethmeet library.
+Automate online meetings with ethmeet library.
 
 ## Installation
-From source:
-```shell script
-git clone git@github.com:sourcerer0/ethmeet.git && cd ethmeet
-
-python3 -m setup install
-
-# In case you're having trouble with QT_DEVICE_PIXEL_RATIO
-./QT_DEVICE.sh
-```
-
 Pip:
 ```shell script
-python3 -m pip install ethmeet
+pip3 install ethmeet
 ```
-
-### Dependancies
-#### Package Installer
-```shell script
-pip3 install -r requirements.txt
-```
-
-#### Browser
-*NOTE: attendMeet module uses Firefox as its standard browser*
-
-##### Geckodriver Install (Linux)
-```shell script
-./gecko-install
-```
+> NOTE: ethmeet module uses Firefox as its standard browser
 
 ## Docs
 - [AttendMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/attendMeet.md)
+- [CreateMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/createMeet.md)
+### Basic Usage
+```python
+import sys
+
+from time import sleep
+TIME = 10 #class length in seconds
+
+from ethmeet import GoogleMeet, ZoomMeet
+
+hall = GoogleMeet(code = "aaabbbbccc")
+#hall = ZoomMeet("some zoom meeting code or url here")
+
+hall.login_data = {"user": "<your username>",
+                "passwd": "<your password>"}
+# hall.login_data = {} for CLI input
+
+hall.driver = "firefox"
+
+hall.doLogin()
+
+hall.enter_class()
+
+for _ in range(TIME): sleep(1)
+
+hall.driver.close()
+```
 
 ## Contributing & Issue Tracker
 Branch & [Pull Request](https://github.com/sourcerer0/ethmeet/pulls)
 - [Issues](https://github.com/sourcerer0/ethmeet/issues)
+
+### Get source
+```shell script
+git clone git@github.com:sourcerer0/ethmeet.git && cd ethmeet
+
+python3 -m virtualenv . && pip3 install -r requirements.txt
+```
 
 ## License
 [Apache License 2.0](https://github.com/sourcerer0/ethmeet/blob/master/LICENSE)
