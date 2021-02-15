@@ -3,6 +3,8 @@ from ethmeet.create import CreateGoogle
 from ethmeet.login import GoogleLogin
 from ethmeet.driver import Driver
 
+from time import sleep
+
 
 # SET WEB DRIVER
 web_driver = Driver()
@@ -27,3 +29,8 @@ adm.new_meet()
 # GO TO MEET
 meet = GoogleMeet(web_driver, code = adm.code)
 meet.goto_meet()
+
+
+# CLOSE CONNECTION
+for _ in range(5): sleep(1)
+web_driver.driver.close()
