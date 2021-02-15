@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ethmeet",
-    version="1.5.3-b.2",
+    version="1.5.3-b.3",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Online meeting automation tool",
@@ -26,6 +26,7 @@ setuptools.setup(
     ],
     install_requires=[
         'selenium>=3.141.0',
-        'urllib3>=1.26.3'
+        'urllib3>=1.26.3',
+        'cryptography>=3.2'
     ]
 )

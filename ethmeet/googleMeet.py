@@ -5,19 +5,19 @@ from .attend import AttendMeet
 
 class GoogleMeet(AttendMeet):
     def __init__(self, **kwargs):
-        """
-        Parameters:\n
-            kwargs['code'] (string): Meeting code\n
-        """
         super().__init__(**kwargs)
-        self.login_url = "google"
 
     def goto_meet(self):
         try: self.driver.get(self.meet_url)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
+            raise
         except selenium.common.exceptions.InvalidSessionIdException:
-            return
+            print("ERROR ****** INVALID SESSION! ******")
+            raise
+        except AttributeError:
+            print("ERROR ****** WEB DRIVER NOT FOUND! ******")
+            raise
 
         for _ in range(25):
             try:
@@ -28,40 +28,6 @@ class GoogleMeet(AttendMeet):
                 continue
 
         return
-
-    def doLogin(self):
-        self.driver.get(self.login_url)
-
-        #USER
-        try:
-            self.driver.find_element_by_id("identifierId").send_keys(self.login_data["user"])
-            self.driver.find_element_by_id("identifierNext").click()
-            try:
-                if self.driver.find_element_by_class_name("o6cuMc"):
-                    print("ERROR ****** Login failed. Check user and try again! ******")
-                    return
-            except selenium.common.exceptions.NoSuchElementException: pass
-        except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
-            print("ERROR ****** Login failed. Check your connection and try again! ******")
-            return
-            
-        #PASSWORD
-        for _ in range(15):
-            try:
-                self.driver.find_element_by_name("password").send_keys(self.login_data["passwd"])
-                break
-            except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
-                sleep(1)
-        try:
-            self.driver.find_element_by_id("passwordNext").click()
-            try:
-                if self.driver.find_element_by_class_name("EjBTad"):
-                    print("ERROR ****** Login failed. Check your password and try again! ******")
-                    return
-            except selenium.common.exceptions.NoSuchElementException: pass
-        except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
-                print("ERROR ****** Login failed. Check your connection and try again! ******")
-                return
 
     def set_meeting_url(self, code):
         code_len = len(code)

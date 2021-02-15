@@ -4,9 +4,11 @@ from time import sleep
 import selenium.common.exceptions
 
 class CreateMeet(ABC):
-    def __init__(self, driver = None,**kwargs):
+    def __init__(self, **kwargs):
         self.__code = None
-        self.__driver = driver
+        try:
+            self.driver = kwargs["driver"].driver
+        except (AttributeError, KeyError): pass
 
     @abstractmethod
     def new_meet(self):
@@ -23,19 +25,25 @@ class CreateMeet(ABC):
             print("Code unset!")
             return None
 
-    @property
-    def driver(self): return self.__driver
-
 class CreateGoogle(CreateMeet):
-    def __init__(self, driver = None, **kwargs):
-        super().__init__(driver, **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def new_meet(self):
-        self.driver.get("https://meet.google.com/")
-        button = self.driver.find_element_by_class_name("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe cjtUbb Dg7t5c".replace(" ", "."))
-        button.click()
-        button = self.driver.find_element_by_class_name("VfPpkd-rymPhb-ibnC6b VfPpkd-rOvkhd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe".replace(" ", "."))
-        button.click()
+        try:
+            self.driver.get("https://meet.google.com/")
+        except AttributeError:
+            print("ERROR ****** WEB DIVER OR LOGIN URL UNSET! ******")
+            raise
+
+        try:
+            button = self.driver.find_element_by_class_name("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe cjtUbb Dg7t5c".replace(" ", "."))
+            button.click()
+            button = self.driver.find_element_by_class_name("VfPpkd-rymPhb-ibnC6b VfPpkd-rOvkhd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe".replace(" ", "."))
+            button.click()
+        except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
+            print("ERROR ****** Login failed. No element found! Couldn't stablish connection ******")
+            return
 
         for _ in range(5):
             try:
