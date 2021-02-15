@@ -12,7 +12,7 @@ web_driver.driver = "firefox"
 
 
 # LOGIN
-myAccount = GoogleLogin(web_driver)
+myAccount = GoogleLogin(driver = web_driver)
 
 myAccount.login_url = "google"
 # myAccount.login_url = "zoom"
@@ -22,12 +22,12 @@ myAccount.doLogin()
 
 
 # CREATE NEW MEET
-adm = CreateGoogle(web_driver)
+adm = CreateGoogle(driver = web_driver)
 adm.new_meet()
 
 
 # GO TO MEET
-meet = GoogleMeet(web_driver, code = adm.code)
+meet = GoogleMeet(driver = web_driver, code = adm.code)
 meet.goto_meet()
 
 
