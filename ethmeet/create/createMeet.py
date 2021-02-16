@@ -3,12 +3,17 @@ from time import sleep
 
 import selenium.common.exceptions
 
-class CreateMeet(ABC):
+from ..driver import Driver
+
+
+class CreateMeet(ABC, Driver):
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.__code = None
+
         try:
-            self.driver = kwargs["driver"].driver
-        except (AttributeError, KeyError): pass
+            self.driver = kwargs["driver"]
+        except (KeyError): pass
 
     @abstractmethod
     def new_meet(self):

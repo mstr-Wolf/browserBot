@@ -6,7 +6,7 @@ Pip:
 ```shell script
 pip3 install ethmeet
 ```
-> NOTE: ethmeet module uses Firefox as its standard browser
+> NOTE: ethmeet uses Firefox as its standard browser
 
 ## Docs
 - [AttendMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/attendMeet.md)
