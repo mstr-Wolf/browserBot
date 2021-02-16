@@ -4,14 +4,18 @@ from abc import ABC, abstractmethod
 
 import selenium.common.exceptions
 
+from ..driver import Driver
 
-class Login(ABC):
+
+class Login(ABC, Driver):
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.__login_data = {}
         self.__login_url = None
+
         try:
-            self.driver = kwargs["driver"].driver
-        except (AttributeError, KeyError): pass
+            self.driver = kwargs["driver"]
+        except (KeyError): pass
 
     @abstractmethod
     def doLogin(self): raise NotImplementedError

@@ -17,3 +17,10 @@ class Driver():
 
     @property
     def driver(self): return self.__driver
+
+    @driver.setter
+    def driver(self, driver):
+        if WebDriver.__dict__["__module__"] in str(type(driver)):
+            self.__driver = driver
+        else:
+            print("ERROR ****** WEB DRIVER NOT ACCEPTED! ******")
