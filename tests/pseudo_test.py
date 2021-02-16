@@ -71,5 +71,5 @@ else:
 
 # CLOSE CONNECTION
 print("Closing process initiated!")
-for _ in range(180): sleep(1)
+for _ in range(15): sleep(1)
 myAccount.driver.close()
