@@ -43,7 +43,7 @@ class CreateGoogle(CreateMeet):
             button.click()
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
             print("ERROR ****** Login failed. No element found! Couldn't stablish connection ******")
-            return
+            return False
 
         for _ in range(5):
             try:
@@ -52,3 +52,4 @@ class CreateGoogle(CreateMeet):
             except (selenium.common.exceptions.NoSuchElementException): sleep(1)
 
         self.driver.get("https://meet.google.com/")
+        return True
