@@ -7,7 +7,6 @@ class AttendMeet(ABC):
             self.driver = kwargs["driver"].driver
         except (AttributeError, KeyError): pass
 
-        print(kwargs["code"])
         try: self.set_meeting_url(kwargs["code"])
         except KeyError: pass
 

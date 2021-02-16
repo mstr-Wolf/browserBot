@@ -12,18 +12,20 @@ class ZoomMeet(GoogleMeet):
             self.driver.find_elements_by_tag_name("a")[4].click()
         except (selenium.common.exceptions.InvalidArgumentException, selenium.common.exceptions.NoSuchElementException):
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
-            raise
+            return False
         except selenium.common.exceptions.InvalidSessionIdException:
             print("ERROR ****** INVALID SESSION! ******")
-            raise
+            return False
         except AttributeError:
             print("ERROR ****** WEB DRIVER NOT FOUND! ******")
-            raise
+            return False
 
         self.driver.find_element_by_id("joinBtn").click()
-        return
+        return True
 
     def set_meeting_url(self, code):
         if "https://zoom.us/j/" in code:
             self.meet_url = code
         else: self.meet_url="https://zoom.us/j/%s" % code
+
+        return True

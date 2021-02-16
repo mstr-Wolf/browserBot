@@ -51,7 +51,7 @@ class GoogleLogin(Login):
         try: self.driver.get(self.login_url)
         except AttributeError:
             print("ERROR ****** WEB DIVER OR LOGIN URL UNSET! ******")
-            raise
+            return False
 
         #USER
         try:
@@ -60,12 +60,12 @@ class GoogleLogin(Login):
             try:
                 if self.driver.find_element_by_class_name("o6cuMc"):
                     print("ERROR ****** Login failed. Check user and try again! ******")
-                    return
+                    return False
             except selenium.common.exceptions.NoSuchElementException: pass
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
-            print("ERROR ****** Login failed. No element found! Couldn't stablish connection ******")
-            return
-            
+            print("ERROR ****** Login failed. No element (o6cuMc) found! Couldn't stablish connection ******")
+            return False
+
         #PASSWORD
         for _ in range(15):
             try:
@@ -73,13 +73,15 @@ class GoogleLogin(Login):
                 break
             except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
                 sleep(1)
-        try:
-            self.driver.find_element_by_id("passwordNext").click()
+        for _ in range(15):
             try:
-                if self.driver.find_element_by_class_name("EjBTad"):
-                    print("ERROR ****** Login failed. Check your password and try again! ******")
-                    return
-            except selenium.common.exceptions.NoSuchElementException: pass
-        except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
-                print("ERROR ****** Login failed. No element found! Couldn't stablish connection ******")
-                return
+                self.driver.find_element_by_id("passwordNext").click()
+                try:
+                    if self.driver.find_element_by_class_name("EjBTad"):
+                        print("ERROR ****** Login failed. Check your password and try again! ******")
+                        return False
+                except selenium.common.exceptions.NoSuchElementException: break
+            except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
+                    print("ERROR ****** Login failed. No element (passwordNext) found! Trying again... ******")
+                    sleep(1)
+        return True
