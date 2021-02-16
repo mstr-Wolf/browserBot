@@ -9,8 +9,7 @@ pip3 install ethmeet
 > NOTE: ethmeet uses Firefox as its standard browser
 
 ## Docs
-- [AttendMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/attendMeet.md)
-- [CreateMeet Basic Usage](https://github.com/sourcerer0/ethmeet/blob/master/docs/createMeet.md)
+- [ethmeet Basic Usage & API Reference](https://github.com/sourcerer0/ethmeet/blob/master/docs/ethmeet.md)
 
 ## Contributing & Issue Tracker
 Branch & [Pull Request](https://github.com/sourcerer0/ethmeet/pulls)
