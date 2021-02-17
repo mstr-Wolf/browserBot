@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ethmeet",
-    version="1.5.3",
+    version="1.5.4-b.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
-    description="Online meeting automation tool",
+    description="Automate online meetings with ethmeet library.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer0/ethmeet",
@@ -19,7 +19,7 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: POSIX :: Linux",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     scripts=[
         'scripts/gecko_install',
         'scripts/QT_DEVICE',
