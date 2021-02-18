@@ -1,5 +1,7 @@
 # ethmeet
-Automate online meetings with ethmeet library.
+'ethmeet' stands for 'Ethical Meeting'.
+>
+Video-communication webdriver library. API compatible with most famous platforms.
 
 ## Installation
 Pip:
