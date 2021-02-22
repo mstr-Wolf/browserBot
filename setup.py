@@ -8,7 +8,7 @@ setuptools.setup(
     version="1.5.4-b.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
-    description="Automate online meetings with ethmeet library.",
+    description="'ethmeet' stands for 'Ethical Meeting'. A video-communication webdriver library. API compatible with most famous platforms.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer0/ethmeet",
