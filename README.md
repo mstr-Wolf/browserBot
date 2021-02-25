@@ -6,7 +6,7 @@ Video-communication webdriver library. API compatible with most famous platforms
 ## Installation
 Pip:
 ```shell script
-pip3 install ethmeet
+pip3 install ethmeet && python3 /usr/local/bin/gecko_install.py
 ```
 > NOTE: ethmeet uses Firefox as its standard browser
 
