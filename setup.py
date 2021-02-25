@@ -21,8 +21,7 @@ setuptools.setup(
     ],
     python_requires='>=3.8',
     scripts=[
-        'scripts/gecko_install',
-        'scripts/QT_DEVICE',
+        'scripts/gecko_install.py',
     ],
     install_requires=[
         'bleach==3.3.0',
