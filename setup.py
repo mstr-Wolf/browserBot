@@ -1,5 +1,4 @@
 import setuptools
-import subprocess
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -56,5 +55,3 @@ setuptools.setup(
         'webencodings==0.5.1'
     ]
 )
-
-subprocess.call(["python3", "/usr/local/bin/gecko_install.py"])
