@@ -11,7 +11,7 @@ setuptools.setup(
     description="'ethmeet' stands for 'Ethical Meeting'. A video-communication webdriver library. API compatible with most famous platforms.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/sourcerer0/ethmeet",
+    url="https://github.com/elleaech/ethmeet",
     packages=setuptools.find_packages(),
     keywords="bot firefox automation browser selenium meeting zoom google",
     classifiers=[
