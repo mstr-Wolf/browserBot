@@ -4,7 +4,7 @@ from ..driver import Driver
 
 class AttendMeet(ABC, Driver):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(ABC).__init__()
         self.meet_url = None
 
         try:

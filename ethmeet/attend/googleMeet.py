@@ -1,7 +1,7 @@
 from time import sleep
 import selenium.common.exceptions
 
-from .attend import AttendMeet
+from .attendMeet import AttendMeet
 
 class GoogleMeet(AttendMeet):
     def __init__(self, **kwargs):
