@@ -25,11 +25,6 @@ self.driver = "<Selenium WebDriver>"
 - Returns: None
 
 ## [login.Login](https://github.com/sourcerer0/ethmeet/blob/master/ethmeet/login/login.py)
-``` python
-# 'driver.Driver' Child Class
-# and for that reason, also takes every parameter, attribute and method from Driver
-```
-
 ### Parameters
 #### driver
 - Description: Class' selenium driver (Instantiated Web Driver)
@@ -70,11 +65,6 @@ self.login_data = {"user": "",
 - Returns: True or False
 
 ## [attend.AttendMeet](https://github.com/sourcerer0/ethmeet/blob/master/ethmeet/attend/attendMeet.py)
-``` python
-# 'driver.Driver' Child Class
-# and for that reason, takes every parameter, attribute and method from Driver
-```
-
 ### Parameters
 #### code
 - Description: Meeting code
@@ -102,11 +92,6 @@ self.set_meeting_url("code or url")
 - Returns: True or False
 
 ## [create.CreateMeet](https://github.com/sourcerer0/ethmeet/blob/master/ethmeet/create/createMeet.py)
-``` python
-# 'driver.Driver' Child Class
-# and for that reason, takes every parameter, attribute and method from Driver
-```
-
 ### Parameters
 #### driver
 - Description: Class' selenium driver (Instantiated Web Driver)
