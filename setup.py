@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ethmeet",
-    version="1.6.0-a.2",
+    version="1.6.0",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="'ethmeet' stands for 'Ethical Meeting'. A video-communication webdriver library. API compatible with most famous platforms.",
