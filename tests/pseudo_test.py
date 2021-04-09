@@ -1,4 +1,4 @@
-from ethmeet import GoogleMeet
+from ethmeet.attend import GoogleMeet
 from ethmeet.create import CreateGoogle
 from ethmeet.login import GoogleLogin
 from ethmeet.driver import Driver
@@ -11,15 +11,7 @@ login_data = {}
 
 # SET WEB DRIVER
 adm_driver = Driver(auto_start = True)
-
-
-
-
-# TESTING START FUNCTION
-adm_test = GoogleLogin()
-for _ in range(2):
-        adm_test.start()
-adm_test.driver.close()
+# adm_driver.__start()
 
 
 
@@ -29,8 +21,6 @@ adm_login = GoogleLogin(driver = adm_driver.driver)
 adm_create = CreateGoogle(driver = adm_driver.driver)
 
 
-adm_login.login_url = "google"
-# myAccount.login_url = "zoom"
 adm_login.login_data = login_data
 
 if adm_login.doLogin(): adm_create.new_meet()
@@ -50,14 +40,10 @@ else:
 
 
 # LOGIN 2
-myAccount = GoogleLogin()
-myAccount.start()
+myAccount = GoogleLogin(driver = adm_driver.driver)
 
-meet = GoogleMeet()
-meet.driver = myAccount.driver
+meet = GoogleMeet(driver = adm_driver.driver)
 
-myAccount.login_url = "google"
-# myAccount.login_url = "zoom"
 myAccount.login_data = login_data
 
 if myAccount.doLogin() and adm_create.code != None:

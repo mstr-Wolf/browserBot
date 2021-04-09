@@ -8,7 +8,7 @@ from ..driver import Driver
 
 class CreateMeet(ABC, Driver):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(ABC).__init__()
         self.__code = None
 
         try:

@@ -1,7 +1,7 @@
 # ethmeet
-'ethmeet' stands for 'Ethical Meeting'.
->
-Video-communication webdriver library. API compatible with most famous platforms.
+Video-chat API. Compatible with most famous platforms.
+
+> 'ethmeet' stands for 'Ethical Meeting'.
 
 ## Installation
 Pip:

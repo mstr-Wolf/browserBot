@@ -9,7 +9,7 @@ from ..driver import Driver
 
 class Login(ABC, Driver):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(ABC).__init__()
         self.__login_data = {}
         self.__login_url = None
 
@@ -50,6 +50,7 @@ class Login(ABC, Driver):
 class GoogleLogin(Login):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.login_url = "google"
 
     def doLogin(self):
         try: self.driver.get(self.login_url)
