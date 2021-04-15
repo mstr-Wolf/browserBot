@@ -1,14 +1,11 @@
 # ethmeet
 Video-chat API. Compatible with most famous platforms.
 
-> 'ethmeet' stands for 'Ethical Meeting'.
-
 ## Installation
 Pip:
 ```shell script
 pip3 install ethmeet && python3 /usr/local/bin/gecko_install.py
 ```
-> NOTE: ethmeet uses Firefox as its standard browser
 
 ## Docs
 - [ethmeet Basic Usage & API Reference](https://github.com/elleaech/ethmeet/blob/master/docs/ethmeet.md)
