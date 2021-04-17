@@ -1,6 +1,6 @@
-from ethmeet.attend import GoogleMeet
+from ethmeet.attend import AttendGoogle
 from ethmeet.create import CreateGoogle
-from ethmeet.login import GoogleLogin
+from ethmeet.login import LoginGoogle
 from ethmeet.driver import Driver
 
 from time import sleep
@@ -17,7 +17,7 @@ adm_driver = Driver(auto_start = True)
 
 
 # LOGIN 1
-adm_login = GoogleLogin(driver = adm_driver.driver)
+adm_login = LoginGoogle(driver = adm_driver.driver)
 adm_create = CreateGoogle(driver = adm_driver.driver)
 
 
@@ -26,7 +26,7 @@ adm_login.login_data = login_data
 if adm_login.doLogin(): adm_create.new_meet()
 
 """
-adm_meet = GoogleMeet()
+adm_meet = AttendGoogle()
 adm_meet.driver = adm_driver
 
 if adm_login.doLogin() and adm_create.new_meet():
@@ -40,9 +40,9 @@ else:
 
 
 # LOGIN 2
-myAccount = GoogleLogin(driver = adm_driver.driver)
+myAccount = LoginGoogle(driver = adm_driver.driver)
 
-meet = GoogleMeet(driver = adm_driver.driver)
+meet = AttendGoogle(driver = adm_driver.driver)
 
 myAccount.login_data = login_data
 

@@ -1,8 +1,8 @@
 import selenium.common.exceptions
 
-from .googleMeet import GoogleMeet
+from .attendGoogle import AttendGoogle
 
-class ZoomMeet(GoogleMeet):
+class AttendZoom(AttendGoogle):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 

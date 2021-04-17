@@ -1,1 +1,1 @@
-from .login import Login, GoogleLogin
+from .login import LoginGoogle

@@ -64,7 +64,7 @@ self.login_data = {"user": "",
 - Parameters: None
 - Returns: True or False
 
-## [attend.AttendMeet](https://github.com/sourcerer0/ethmeet/blob/master/ethmeet/attend/attendMeet.py)
+## [attend.Attend](https://github.com/sourcerer0/ethmeet/blob/master/ethmeet/attend/attend.py)
 ### Parameters
 #### code
 - Description: Meeting code

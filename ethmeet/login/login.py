@@ -11,7 +11,7 @@ class Login(ABC, Driver):
     def __init__(self, **kwargs):
         super(ABC).__init__()
         self.__login_data = {}
-        self.__login_url = None
+        self._login_url = None
 
         try:
             self.driver = kwargs["driver"]
@@ -32,28 +32,24 @@ class Login(ABC, Driver):
             passwd = getpass("Password: ")
             self.__login_data = {"user": user, "passwd": passwd}
 
-    @property
-    def login_url(self): return self.__login_url
-
-    @login_url.setter
-    def login_url(self, platform):
+    def _set_login_url(self, platform):
         plat_login = {
             "google": "https://accounts.google.com/Login?hl=pt-BR",
             "meet": "https://accounts.google.com/Login?hl=pt-BR",
             "zoom": "https://zoom.us/google_oauth_signin"
         }
-        try: self.__login_url = plat_login[platform]
+        try: self._login_url = plat_login[platform]
         except KeyError:
             print("ERROR ****** ******** Platform not available! ******")
 
 
-class GoogleLogin(Login):
+class LoginGoogle(Login):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.login_url = "google"
+        self._set_login_url("google")
 
     def doLogin(self):
-        try: self.driver.get(self.login_url)
+        try: self.driver.get(self._login_url)
         except AttributeError:
             print("ERROR ****** WEB DIVER OR LOGIN URL UNSET! ******")
             return False
