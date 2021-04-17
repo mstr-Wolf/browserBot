@@ -44,7 +44,7 @@ class CreateGoogle(CreateMeet):
         try:
             button = self.driver.find_element_by_class_name("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe cjtUbb Dg7t5c".replace(" ", "."))
             button.click()
-            button = self.driver.find_element_by_class_name("VfPpkd-rymPhb-ibnC6b VfPpkd-rOvkhd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe".replace(" ", "."))
+            button = self.driver.find_element_by_class_name("VfPpkd-StrnGf-rymPhb-ibnC6b VfPpkd-rymPhb-ibnC6b-OWXEXe-tPcied-hXIJHe".replace(" ", "."))
             button.click()
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException):
             print("ERROR ****** Login failed. No element found! Couldn't stablish connection ******")
