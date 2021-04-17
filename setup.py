@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ethmeet",
-    version="1.6.1-a.1",
+    version="1.6.1-a.2",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Video-chat API. Compatible with most famous platforms.",

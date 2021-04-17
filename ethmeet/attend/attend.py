@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from ..driver import Driver
 
-class AttendMeet(ABC, Driver):
+class Attend(ABC, Driver):
     def __init__(self, **kwargs):
         super(ABC).__init__()
         self.meet_url = None

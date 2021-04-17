@@ -1,2 +1,2 @@
-from .googleMeet import GoogleMeet
-from .zoomMeet import ZoomMeet
+from .attendGoogle import AttendGoogle
+from .attendZoom import AttendZoom

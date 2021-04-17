@@ -19,7 +19,7 @@ class CreateMeet(ABC, Driver):
     def new_meet(self):
         return
 
-    def set_new_meet(self, code):
+    def _set_new_meet(self, code):
         self.__code = code
 
     @property
@@ -52,7 +52,7 @@ class CreateGoogle(CreateMeet):
 
         for _ in range(5):
             try:
-                self.set_new_meet(self.driver.find_element_by_class_name("Hayy8b").text)
+                self._set_new_meet(self.driver.find_element_by_class_name("Hayy8b").text)
                 break
             except (selenium.common.exceptions.NoSuchElementException): sleep(1)
 
