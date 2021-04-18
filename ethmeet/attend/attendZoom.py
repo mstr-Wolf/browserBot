@@ -8,8 +8,8 @@ class AttendZoom(AttendGoogle):
 
     def goto_meet(self):
         try:
-            self.driver.get(self.meet_url)
-            self.driver.find_elements_by_tag_name("a")[4].click()
+            self._driver.get(self.meet_url)
+            self._driver.find_elements_by_tag_name("a")[4].click()
         except (selenium.common.exceptions.InvalidArgumentException, selenium.common.exceptions.NoSuchElementException):
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             return False
@@ -20,7 +20,7 @@ class AttendZoom(AttendGoogle):
             print("ERROR ****** WEB DRIVER NOT FOUND! ******")
             return False
 
-        self.driver.find_element_by_id("joinBtn").click()
+        self._driver.find_element_by_id("joinBtn").click()
         return True
 
     def set_meeting_url(self, code):

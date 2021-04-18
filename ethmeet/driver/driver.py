@@ -10,11 +10,14 @@ class Driver():
     def close(self):
         self.__driver.close()
 
-    @property
-    def driver(self): return self.__driver
+    def __call__(self):
+        return self.__driver
 
-    @driver.setter
-    def driver(self, driver):
+    @property
+    def _driver(self): return self.__driver
+
+    @_driver.setter
+    def _driver(self, driver):
         if WebDriver.__dict__["__module__"] in str(type(driver)):
             self.__driver = driver
         else:

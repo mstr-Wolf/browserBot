@@ -8,7 +8,7 @@ class AttendGoogle(Attend):
         super().__init__(**kwargs)
 
     def goto_meet(self):
-        try: self.driver.get(self.meet_url)
+        try: self._driver.get(self.meet_url)
         except selenium.common.exceptions.InvalidArgumentException:
             print("ERROR ****** Meeting code was not properly set. Please, provide a valid one and try again! ******")
             return False
@@ -21,7 +21,7 @@ class AttendGoogle(Attend):
 
         for _ in range(25):
             try:
-                button = self.driver.find_elements_by_class_name("uArJ5e UQuaGc Y5sE8d uyXBBb xKiqt M9Bg4d".replace(" ", "."))
+                button = self._driver.find_elements_by_class_name("uArJ5e UQuaGc Y5sE8d uyXBBb xKiqt M9Bg4d".replace(" ", "."))
                 button[0].click()
                 break
             except IndexError:

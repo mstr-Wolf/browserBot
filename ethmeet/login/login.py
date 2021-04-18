@@ -14,7 +14,7 @@ class Login(ABC, Driver):
         self._login_url = None
 
         try:
-            self.driver = kwargs["driver"]
+            self._driver = kwargs["driver"]
         except (KeyError): pass
 
     @abstractmethod
@@ -49,17 +49,17 @@ class LoginGoogle(Login):
         self._set_login_url("google")
 
     def doLogin(self):
-        try: self.driver.get(self._login_url)
+        try: self._driver.get(self._login_url)
         except AttributeError:
             print("ERROR ****** WEB DIVER OR LOGIN URL UNSET! ******")
             return False
 
         #USER
         try:
-            self.driver.find_element_by_id("identifierId").send_keys(self.login_data["user"])
-            self.driver.find_element_by_id("identifierNext").click()
+            self._driver.find_element_by_id("identifierId").send_keys(self.login_data["user"])
+            self._driver.find_element_by_id("identifierNext").click()
             try:
-                if self.driver.find_element_by_class_name("o6cuMc"):
+                if self._driver.find_element_by_class_name("o6cuMc"):
                     print("ERROR ****** Login failed. Check user and try again! ******")
                     return False
             except selenium.common.exceptions.NoSuchElementException: pass
@@ -70,15 +70,15 @@ class LoginGoogle(Login):
         #PASSWORD
         for _ in range(15):
             try:
-                self.driver.find_element_by_name("password").send_keys(self.login_data["passwd"])
+                self._driver.find_element_by_name("password").send_keys(self.login_data["passwd"])
                 break
             except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementNotInteractableException):
                 sleep(1)
         for _ in range(15):
             try:
-                self.driver.find_element_by_id("passwordNext").click()
+                self._driver.find_element_by_id("passwordNext").click()
                 try:
-                    if self.driver.find_element_by_class_name("EjBTad"):
+                    if self._driver.find_element_by_class_name("EjBTad"):
                         print("ERROR ****** Login failed. Check your password and try again! ******")
                         return False
                 except selenium.common.exceptions.NoSuchElementException: break

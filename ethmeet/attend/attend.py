@@ -8,7 +8,7 @@ class Attend(ABC, Driver):
         self.__meet_url = None
 
         try:
-            self.driver = kwargs["driver"]
+            self._driver = kwargs["driver"]
         except (KeyError): pass
 
         try: self.set_meeting_url(kwargs["code"])
