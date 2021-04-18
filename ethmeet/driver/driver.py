@@ -4,14 +4,11 @@ import os
 EXECUTABLE_PATH = os.environ["HOME"] + "/geckodriver"
 
 class Driver():
-    def __init__(self, auto_start = True):
-        if ["auto_start"] == False:
-            self.__driver = None
-        else:
-            self.__driver = WebDriver(executable_path=EXECUTABLE_PATH)
-
-    def __start(self):
+    def __init__(self):
         self.__driver = WebDriver(executable_path=EXECUTABLE_PATH)
+
+    def close(self):
+        self.__driver.close()
 
     @property
     def driver(self): return self.__driver

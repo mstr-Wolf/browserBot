@@ -5,7 +5,7 @@ from ..driver import Driver
 class Attend(ABC, Driver):
     def __init__(self, **kwargs):
         super(ABC).__init__()
-        self.meet_url = None
+        self.__meet_url = None
 
         try:
             self.driver = kwargs["driver"]
@@ -20,3 +20,7 @@ class Attend(ABC, Driver):
 
     @abstractmethod
     def set_meeting_url(self, code): raise NotImplementedError
+
+    @property
+    def meet_url(self):
+        return self.__meet_url

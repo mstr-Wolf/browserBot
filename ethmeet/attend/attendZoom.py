@@ -25,7 +25,7 @@ class AttendZoom(AttendGoogle):
 
     def set_meeting_url(self, code):
         if "https://zoom.us/j/" in code:
-            self.meet_url = code
-        else: self.meet_url="https://zoom.us/j/%s" % code
+            self._Attend__meet_url = code
+        else: self._Attend__meet_url="https://zoom.us/j/%s" % code
 
         return True
