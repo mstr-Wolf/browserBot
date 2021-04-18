@@ -38,9 +38,9 @@ class AttendGoogle(Attend):
         mCode = ""
 
         if "https://meet.google.com/" in code:
-            self.meet_url = code
+            self._Attend__meet_url = code
         elif "meet.google.com/" in code:
-            self.meet_url= "{0}{1}".format("https://", code)
+            self._Attend__meet_url= "{0}{1}".format("https://", code)
         else:
             if type(code) != type(0) and ((code_len == 12 and code[3] == "-" and code[8] == "-") or code_len == 10):
                 for crc in code:
@@ -53,5 +53,5 @@ class AttendGoogle(Attend):
                 print("ERROR ****** Meeting code not accepted! Please check again ******")
                 return False
 
-            self.meet_url="https://meet.google.com/%s" % mCode
+            self._Attend__meet_url="https://meet.google.com/%s" % mCode
         return True
