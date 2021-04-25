@@ -9,7 +9,8 @@ pip3 install ethmeet
 
 Install Geckodriver:
 ```shell script
-python3 /usr/local/bin/gecko_install.py
+git clone git@github.com:elleaech/ethmeet.git
+python3 ethmeet/scripts/gecko_install.py
 ```
 
 ## Docs
